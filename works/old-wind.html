@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LONG DOCUMENT TEMPLATE · parchment design system
+     多页 A4 白皮书/技术报告/年度总结
+     结构：封面 -> 目录 -> 执行摘要 -> 正文章节 -> 附录
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>旧日来风</title>
+<meta name="author" content="一舟">
+<meta name="description" content="两位女性的成长与重逢。">
+<meta name="keywords" content="文学写作 · 小说全文">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  
+
+  /* Bold weight - W05 for all bold variants */
+  
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+
+    @top-right {
+      content: string(section-title);
+      font-family: "TsangerJinKai02", "Source Han Serif SC",
+                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-size: 8pt;
+      color: #6b6a64;
+    }
+
+    @bottom-center {
+      content: counter(page) "  ·  旧日来风";
+      font-family: "TsangerJinKai02", "Source Han Serif SC",
+                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  @page:first {
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+    --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm 22mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+  }
+
+  .sans {
+    font-family: var(--sans);
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40mm 0 0 0;
+    break-after: page;
+  }
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8pt;
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 18pt;
+  }
+  .cover-eyebrow::before {
+    content: "";
+    width: 9pt;
+    height: 1.5pt;
+    border-radius: 0.75pt;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.15;
+    letter-spacing: 0.3pt;
+    margin-bottom: 16pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 85%;
+    margin-bottom: 30pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 500;
+  }
+
+  /* ========== TOC（目录）========== */
+  .toc { break-after: page; }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 500;
+    margin-bottom: var(--rhythm-module);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    font-size: 11pt;
+  }
+  .toc-item:last-of-type { border-bottom: none; }
+  .toc-num {
+    color: var(--brand);
+    font-weight: 500;
+    min-width: 30pt;
+  }
+  .toc-title {
+    flex: 1;
+    color: var(--near-black);
+    padding-left: 6pt;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 12pt;
+  }
+  .toc-title[href]::after {
+    content: target-counter(attr(href), page);
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    margin-left: auto;
+  }
+
+  /* ========== HEADINGS ========== */
+  h1 {
+    font-size: 22pt;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 10pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    color: var(--near-black);
+    break-after: avoid;
+    string-set: section-title content();
+  }
+
+  .running-title { string-set: section-title content(); }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 24pt 0 8pt 0;
+    color: var(--near-black);
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 18pt 0 6pt 0;
+    color: var(--dark-warm);
+    break-after: avoid;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 6pt;
+  }
+
+  /* ========== PARAGRAPHS ========== */
+  p {
+    margin: 0 0 10pt 0;
+    line-height: 1.55;
+    color: var(--near-black);
+    widows: 2;
+    orphans: 2;
+  }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: var(--rhythm-module);
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+  strong { font-weight: 500; }
+
+  /* ========== LISTS ========== */
+  ul, ol {
+    margin: 6pt 0 10pt 0;
+    padding-left: 20pt;
+    line-height: 1.55;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+
+  /* ========== QUOTE ========== */
+  blockquote, .quote {
+    border-left: 2pt solid var(--brand);
+    margin: 12pt 0;
+    padding: 4pt 0 4pt 16pt;
+    color: var(--olive);
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  blockquote .cite, .quote .cite {
+    display: block;
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+  }
+
+  /* ========== CODE ========== */
+  /* Mono first for English glyphs, then CJK fallback so Chinese comments
+     inside code/pre render correctly. A mono-only chain causes missing
+     glyphs rendered as "?" or missing-glyph boxes in WeasyPrint when the system lacks
+     a mono font with CJK coverage. */
+  code {
+    font-family: "JetBrains Mono", "SF Mono", Consolas,
+                 "TsangerJinKai02", "Source Han Serif SC",
+                 "Noto Serif CJK SC", "Songti SC", monospace;
+    font-size: 9pt;
+    background: var(--ivory);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    color: var(--dark-warm);
+  }
+  pre {
+    font-family: "JetBrains Mono", "SF Mono", Consolas,
+                 "TsangerJinKai02", "Source Han Serif SC",
+                 "Noto Serif CJK SC", "Songti SC", monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+    white-space: pre-wrap;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  pre code { background: transparent; padding: 0; font-size: inherit; }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .callout blockquote,
+  .callout .quote {
+    border-left: none;
+    padding-left: 0;
+    margin: 6pt 0;
+    color: var(--olive);
+  }
+  .callout blockquote:first-child,
+  .callout .quote:first-child { margin-top: 0; }
+  .callout blockquote:last-child,
+  .callout .quote:last-child  { margin-bottom: 0; }
+
+  .takeaway {
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .takeaway-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 4pt;
+  }
+
+  /* ========== FIGURE ========== */
+  figure {
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  figure img {
+    max-width: 100%;
+    border-radius: 4pt;
+  }
+  /* Inline diagrams (e.g. a Mermaid-sourced SVG via scripts/mermaid_normalize.py):
+     center and cap width so the figure never bleeds past the text column. */
+  figure svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 78%;
+    height: auto;
+  }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    text-align: center;
+  }
+
+  /* ========== EXECUTIVE SUMMARY ========== */
+  .exec-summary {
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 6pt;
+    padding: 16pt 20pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .exec-summary h2 {
+    margin-top: 0;
+    font-size: 13pt;
+  }
+
+  /* ========== CHAPTER BREAK ========== */
+  .chapter { break-before: page; }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="reading.css">
+</head>
+<body class="novel">
+<a class="skip-link" href="#article">跳到正文</a>
+<nav class="reading-nav" aria-label="阅读导航"><a class="home" href="../index.html">一舟</a><a href="../index.html#works">返回作品集 ↗</a></nav>
+<main id="article">
+<header class="cover"><p class="cover-eyebrow">文学写作 · 小说全文</p><h1 class="cover-title">旧日来风</h1>
+<p class="cover-sub">两位女性的成长与重逢。</p><p class="reading-note">第二版修订稿 · 全十章。保留原文，可按顺序阅读，也可通过章节目录跳转。</p></header>
+<details class="toc" id="novel-contents"><summary>篇目导航</summary><ol><li><a href="#chapter-1">1. 祝书禾｜雾里的格子间</a></li><li><a href="#chapter-2">2. 江跃｜退租通知</a></li><li><a href="#chapter-3">3. 祝书禾｜风从海上来</a></li><li><a href="#chapter-4">4. 江跃｜碎玻璃上的旧杂志</a></li><li><a href="#chapter-5">5. 祝书禾｜被划掉的远方</a></li><li><a href="#chapter-6">6. 江跃｜夜奔的人</a></li><li><a href="#chapter-7">7. 祝书禾｜主动选择</a></li><li><a href="#chapter-8">8. 江跃｜不是结局</a></li><li><a href="#chapter-9">9. 祝书禾｜刻在船上的记号</a></li><li><a href="#chapter-10">10. 江跃｜我等你</a></li></ol></details><article class="article-body " aria-label="旧日来风正文"><section class="novel-chapter" aria-labelledby="chapter-1"><h2 class="chapter-heading" id="chapter-1">1. 祝书禾｜雾里的格子间</h2><p class="long-paragraph">分公司的空调是立式的，开起来轰隆隆响。我坐在靠窗的工位，隔板比人还高，挡住了大半个办公室，只露出几颗低着头的后脑勺。窗外的江城灰蒙蒙一片，高楼泡在雾里，窗玻璃外面还有风雨印泥点子。桌上摊着三份报表，我看了半个小时，把同一个数字核对了三遍。打印机又卡纸了，红灯一下一下闪着，没人用就没人去管。我盯着那点红光明灭，一呼一吸，不免走神。</p>
+<p class="long-paragraph">手机在抽屉里震了两下。我本来不想看，第三下震动时，我还是拉开抽屉。晓宁发来一张照片，是总部楼下那家难吃的沙拉店，鸡胸肉太白了，导致我每次吃之前还要催眠自己不是在吃鸡的尸体。她说：你们江城分公司有没有人道主义午餐？我低头看了看桌角那盒已经凉掉的便利店饭团，回她：有。她很快发来一个问号。我去茶水间把饭团拍给她，电话立刻打了过来。</p>
+<p class="short-paragraph">&quot;祝书禾。&quot;晓宁一开口就可以想象这是个张牙舞爪的姑娘，&quot;便利店是你食堂吗？&quot;</p>
+<p class="short-paragraph">我把手机夹在肩膀和耳朵之间，腾出手去拆塑料包装，海苔已经受潮了，软趴趴地贴在米饭上。</p>
+<p class="short-paragraph">&quot;没关系，我不是每天都吃这个。&quot;</p>
+<p class="short-paragraph">&quot;作为你的饭搭子，我有必要提醒你不要在江城自甘堕落。&quot;她那边有电梯到达的叮声，又有人跟她打招呼，压低声音换了话题，&quot;你真准备在那边多待两周？&quot;</p>
+<p class="short-paragraph">我手指顿了一下。上午陈姐刚来问过，说项目比预计慢，组里觉得我上手最快，最好留下。话说得很客气，甚至还给我倒了杯水。我说考虑一下。</p>
+<p class="short-paragraph">&quot;还没定。&quot;我说。</p>
+<p class="short-paragraph">晓宁沉默了两秒。她这个人平时嘴快，真正生气时反而话会在脑袋里绕三遍，生怕说重了。</p>
+<p class="short-paragraph">&quot;书禾，你上个月绩效沟通，周组是不是刚跟你说&#x27;主动争取意识不足&#x27;？&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;晋升呢？&quot;</p>
+<p class="short-paragraph">&quot;暂缓。&quot;</p>
+<p class="short-paragraph">&quot;然后没人想去的出差第一个找你，现在要延长还是第一个留你。&quot;</p>
+<p class="short-paragraph">我撕开饭团包装，塑料膜哗啦响，正好盖过她后半句。</p>
+<p class="short-paragraph">&quot;项目需要我没办法。&quot;</p>
+<p class="short-paragraph">&quot;我知道项目需要，&quot;晓宁说，&quot;但是你心里其实清楚你不是没有办法。&quot;</p>
+<p class="short-paragraph">我没说话。窗外一辆工程车慢吞吞驶过，留下两道湿漉漉的车辙。办公室里有人笑了一声，很快又压低下去。</p>
+<p class="short-paragraph">晓宁也没追问，过了一会儿她叹了口气：&quot;算了，你不想说就不说。晚上记得吃热的，别又空腹喝咖啡。&quot;</p>
+<p class="short-paragraph">&quot;知道了。&quot;</p>
+<p class="short-paragraph">电话挂断以后，饭团还是原样软塌塌，我也没了胃口。</p>
+<p class="long-paragraph">我五天前出差来到江城。组里的老周上个月也是被派来的，回来发了三天烧。江城空气不好，项目又赶，大家各有各的理由，最后组长在会议室里看向我，又很快移开视线。我拒绝的话到了嘴边又咽回去，像小时候把可乐里的冰块含在嘴里，又冰又疼，等化到一半，咯吱咯吱咬碎吞下去。</p>
+<p class="long-paragraph">从小到大，很多人都这样看过我。老师说：&quot;祝书禾懂事。&quot;我妈说：&quot;我们让一让人家。&quot;领导说：&quot;你做事稳妥，事情交给你我放心。&quot;这些话听起来都像夸奖，久了我才知道，&quot;懂事&quot;是一张很轻的网，落在人身上时甚至感觉不到重量，等想走远一点，才发现手脚早就缠住了。</p>
+<p class="short-paragraph">我把饭团吃到一半，看了一眼还没熄灭的手机屏幕。微信通讯录里，一个很多年没说过话的名字因为我刚才误触搜索框，跳到了最上面——江跃。</p>
+<p class="short-paragraph">头像还是那只在光里打哈欠的小猫。最后一段对话停在四年前。她问我暑假回不回家，我说学校安排实习。她回：注意身体，听说虹城最近有流感。我只回了一个&quot;嗯&quot;，从此没有下文。</p>
+<p class="short-paragraph">我点开她的朋友圈。六月，她发过一张海。车窗外的海拍糊了，配文只有四个字：临时起意。照片下面很快有人评论：&quot;你是真自由啊姐。&quot;江跃在下面回得很得意：&quot;羡慕吧。&quot;</p>
+<p class="short-paragraph">我盯着那两个字看了很久。</p>
+<p class="short-paragraph">江跃在我的记忆里代表着突然跃出水面的鱼。她敢逃课顶嘴，敢说不喜欢就是不喜欢。十七岁时她拉着我从眼保健操检查里逃出去，风把她校服吹得鼓起来，她回头冲我喊：&quot;祝书禾，你快点！&quot;那么多年过去，我还是记得她跑在前面的样子。</p>
+<p class="short-paragraph">有时候我觉得，江跃是十八岁的幸存者，而我漂流在时间里，是十八岁的亡魂。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-2">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-2"><h2 class="chapter-heading" id="chapter-2">2. 江跃｜退租通知</h2><p class="short-paragraph">房东刘姨通知我退租的时候，我正在用牙签戳咖啡杯底那一圈洗不掉的褐色渍。</p>
+<p class="short-paragraph">&quot;小江啊，下月底房子得收回来。&quot;她在电话那头说得很慢，我不由想起她写在纸条上的小学生字体，&quot;我二儿子要结婚，实在不好意思。&quot;</p>
+<p class="short-paragraph">我把牙签戳断了。</p>
+<p class="short-paragraph">&quot;刘姨，您不是都有孙子了吗？&quot;</p>
+<p class="short-paragraph">&quot;那是大儿子的。&quot;</p>
+<p class="short-paragraph">我抬头看天花板。去年漏雨留下的黄印还在，边缘比春天时又洇大了一圈。门口鞋柜少一只螺丝，关门要先往上提一下，再用膝盖顶回去。</p>
+<p class="short-paragraph">&quot;这房子当婚房，&quot;我很诚恳地说，&quot;对新人是不是有点残忍？&quot;</p>
+<p class="short-paragraph">刘姨在那头笑起来，笑完答应退我双倍押金。我立刻改口：&quot;那我祝二位百年好合。&quot;</p>
+<p class="long-paragraph">电话挂了，屋里一下安静。电脑上还停着第七版，甲方两小时前留下六个字：感觉还是不对。也不说哪儿不对。窗台堆着没拆的快递，里面是我上个月买的收纳袋；墙上的拍摄通告过期很久，胶带失了黏性，风一吹，纸角就轻轻拍墙。这里我住了三年，东西越来越多，真正能充分发挥作用的没有几件。江婷女士对此有一个很准确的命名：江跃同志人生管理失败展览馆。</p>
+<p class="short-paragraph">门在这时候被敲响了，三下，停一停，又三下。我不用看猫眼都知道是谁。</p>
+<p class="short-paragraph">&quot;门没锁。&quot;</p>
+<p class="short-paragraph">阿芮推门进来，先把一袋橘子搁在鞋柜上，又低头看了一眼我手里的半截牙签。</p>
+<p class="short-paragraph">&quot;怎么，&quot;她说，&quot;甲方终于逼得你准备走刑事路线了？&quot;</p>
+<p class="short-paragraph">&quot;是房东。&quot;</p>
+<p class="short-paragraph">&quot;房东怎么了？&quot;</p>
+<p class="short-paragraph">&quot;让我滚。&quot;</p>
+<p class="short-paragraph">她弯腰换拖鞋的动作停了一下，抬头：&quot;不租了？&quot;</p>
+<p class="short-paragraph">&quot;儿子结婚。&quot;</p>
+<p class="short-paragraph">&quot;她不是都有孙子了吗？&quot;</p>
+<p class="short-paragraph">我看着她，她也看着我。然后我们同时说：&quot;二儿子。&quot;阿芮笑得扶住鞋柜，我没笑几声就觉得没劲，转身去给她倒水。</p>
+<p class="long-paragraph">她高中和我、祝书禾同班。那时候我们算不上特别要好，她坐前两排，我和祝书禾常年窝在靠窗的位置，最大的交集是她替班主任收作业时会站在桌边催我：&quot;江跃，就差你。&quot;后来高考各奔东西，她家搬到了江城。江城说大不大，我做短剧编剧，她在本地做拍摄执行，兜兜转转总能在片场碰见。高中没来得及熟的人，反而在二十几岁以后一起熬过通宵、蹲过路边盒饭。她也因此成了少数见过我从阳光开朗好少年变成昼伏夜出熬夜冠军的人。</p>
+<p class="short-paragraph">&quot;还第七版？&quot;她走到电脑前，俯身看屏幕。</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;那个快签的项目呢？&quot;</p>
+<p class="short-paragraph">&quot;黄了。&quot;</p>
+<p class="short-paragraph">她手刚伸向桌上的橘子：&quot;为什么？&quot;</p>
+<p class="short-paragraph">&quot;甲方降本增效，把预算拿去训练智能体了。&quot;</p>
+<p class="short-paragraph">阿芮张了张嘴。我替她总结：&quot;时代进步，人类文明之光。以后机器替我挨骂，我负责失业。&quot;</p>
+<p class="short-paragraph">&quot;然后房子也没了。&quot;</p>
+<p class="short-paragraph">她这回彻底不动了。我自己先笑起来，震得灰尘跟着跳舞。阿芮没跟着笑，她把橘子拿起来，在掌心掂了掂，忽然朝我扔过来。</p>
+<p class="short-paragraph">我下意识偏头，用手接住：&quot;干嘛？&quot;</p>
+<p class="short-paragraph">&quot;确认一下你还知道躲开。&quot;</p>
+<p class="short-paragraph">&quot;神经。&quot;</p>
+<p class="short-paragraph">&quot;这就对了。&quot;她把剩下几个橘子一个个摆到桌上，&quot;你一出事儿就哈哈哈。上回片子被临时撤，你也是；前年摔坏镜头，你还笑着问我能不能当场给它办遗体告别。&quot;</p>
+<p class="short-paragraph">&quot;我坚强乐观不行吗？&quot;</p>
+<p class="short-paragraph">她剥开一个橘子，&quot;你正常的时候，能从甲方祖宗十八代骂到天气预报。突然文明了绝对有问题啊。&quot;</p>
+<p class="short-paragraph">我伸手抢她剥好的橘子。她早知道我要抢，把最大的一瓣塞进我嘴里。</p>
+<p class="short-paragraph">&quot;钱呢？&quot;</p>
+<p class="short-paragraph">&quot;什么钱？&quot;</p>
+<p class="short-paragraph">&quot;我问你的生活费还能撑多久。&quot;</p>
+<p class="short-paragraph">我低头也剥了个橘子，撕橘络，白色的细丝怎么也撕不干净。&quot;阿芮。&quot;</p>
+<p class="short-paragraph">&quot;行，不问。&quot;</p>
+<p class="short-paragraph">她只把剩下的橘子往我这边推了推。这一点她和江婷女士不一样。江婷女士会追着问到底，阿芮深刻明白亲人和朋友的界限。</p>
+<p class="short-paragraph">她弯腰去捡地上的快递盒，纸箱被她一挪，墙角那只旧箱子露出来，封口胶带已经发黄。</p>
+<p class="short-paragraph">&quot;这个是？&quot;</p>
+<p class="short-paragraph">&quot;别动。&quot;</p>
+<p class="short-paragraph">她手停在半空。&quot;哟，&quot;她抬眼细细看，&quot;这不是你高中那箱破烂吗？&quot;</p>
+<p class="short-paragraph">&quot;你怎么知道？&quot;</p>
+<p class="short-paragraph">&quot;毕业搬宿舍的时候我见过。你那时候抱得跟骨灰盒似的。&quot;</p>
+<p class="short-paragraph">&quot;你嘴能不能吉利一点。&quot;</p>
+<p class="short-paragraph">&quot;里面还有你跟小书那本杂志？&quot;</p>
+<p class="short-paragraph">我顿了一下。&quot;应该有吧。&quot;</p>
+<p class="short-paragraph">她嗯了一声。</p>
+<p class="short-paragraph">手机偏偏在这时亮起来。朋友圈提醒里，祝书禾十二点发了一张照片：江城，第五天。灰蒙蒙的写字楼，远处露出一截江面。</p>
+<p class="short-paragraph">我盯着看了一会儿。阿芮从我肩膀后面扫了一眼，连&quot;谁&quot;都没问。</p>
+<p class="short-paragraph">&quot;小书来江城了？&quot;</p>
+<p class="short-paragraph">我把手机按灭：&quot;你眼睛挺尖。&quot;</p>
+<p class="short-paragraph">&quot;废话，高中三年天天看你俩在我后排传纸条。&quot;</p>
+<p class="short-paragraph">&quot;我们没传纸条。&quot;</p>
+<p class="short-paragraph">阿芮剥第二个橘子，橘皮在她指间断成一截一截。&quot;她没找你？&quot;</p>
+<p class="short-paragraph">&quot;为什么要找我？她出差，又不是来寻亲。&quot;</p>
+<p class="short-paragraph">阿芮抬起眼皮看了我一下。我最烦她这种眼神，她太熟悉我了，我根本没办法隐藏我的空落落。</p>
+<p class="short-paragraph">&quot;你想说什么就说，吞吞吐吐很烦诶。&quot;</p>
+<p class="short-paragraph">&quot;没什么。&quot;她低头继续剥橘子，&quot;就是想起高中时候你们每次吵架了，你俩一个在教室里装没事，一个在走廊上装没事。&quot;</p>
+<p class="short-paragraph">&quot;谁装了？&quot;</p>
+<p class="short-paragraph">&quot;你。&quot;</p>
+<p class="short-paragraph">&quot;滚。&quot;</p>
+<p class="short-paragraph">&quot;好。&quot;她笑着把一瓣橘子塞进嘴里。</p>
+<p class="short-paragraph">我重新点亮手机。祝书禾的照片还在那里。她来了江城。这座我住了很多年的城市忽然变小了，小到我第一次意识到，我们之间也许只隔着几条路，几站地铁，我却迈不出第一步。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-3">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-3"><h2 class="chapter-heading" id="chapter-3">3. 祝书禾｜风从海上来</h2><p class="short-paragraph">地震的时候，我正在改一张表。陈姐端着杯子站在我旁边，说下午的数据口径还得再核一下，她说话很快，我一边听一边记，刚写到&quot;供应商&quot;，桌上的水杯忽然往左滑了半寸。我伸手扶住。</p>
+<p class="short-paragraph">&quot;桌子不平？&quot;陈姐低头看。</p>
+<p class="short-paragraph">下一秒，窗玻璃发出很轻的一声颤响。桌子，地板，整栋楼都在动。日光灯管晃出白花花的光，隔板的影子被拉斜。有人从工位站起来，椅子撞到桌沿。打印机那盏卡纸的红灯还在一下一下闪。走廊里忽然有人喊：&quot;地震了！&quot;</p>
+<p class="short-paragraph">灯灭了。</p>
+<p class="short-paragraph">陈姐把杯子一扔：&quot;别坐电梯！走楼梯！&quot;</p>
+<p class="short-paragraph">整层楼像一锅突然烧开的水。我被人流推到消防通道，后面的人不断往前挤，有人踩掉了鞋，有人在哭，还有人在打电话。我一只手护着胸口，一只手抓着扶手，脑子里什么都没有，只剩下一个非常具体的念头：不要摔倒。</p>
+<p class="short-paragraph">楼梯很热。汗味、灰尘味、香水味混在一起，呛得人眼睛发酸。前面忽然停住。&quot;门打不开！&quot;不知道谁喊了一声，人群一下乱了。后面的人不知道前面发生什么，还在往下挤。一个中年男人被推得撞到墙上，举着手机，一遍遍说：&quot;我没事，我真没事，你别担心。&quot;</p>
+<p class="short-paragraph">手机在口袋里震个不停。我妈。晓宁。工作群。我的手抖得拿不稳手机去回复消息。前面不知道怎么又动起来，人群缓慢往下挪。拐到下一层时，一扇窄窗正好开着。风从外面灌进来，凉的，带着灰尘和水泥味。那阵风碰到我汗湿的后颈，我却嗅到了海浪的气味。</p>
+<p class="long-paragraph">很多年前，高中教学楼尽头的露台，也有这样的风。江跃跑在前面，校服外套被吹得鼓起来。她回头冲我笑，嘴里喊什么，我一开始听不清。风太大，把她的声音扯碎了。后来我才听见：&quot;祝书禾——快点！&quot;我当时在后面喊：&quot;你慢点！&quot;鞋底拍在水泥地上，心脏快从胸口跳出来，值日生在后面追。那是我高中三年少有的几次真正慌张，却也是后来很多年里，我记得最清楚的经历。</p>
+<p class="short-paragraph">楼道里有人撞了我一下，我回过神。</p>
+<p class="short-paragraph">原来风一直是这个味道。只是这么多年，我竟然忘了。</p>
+<p class="long-paragraph">终于跑到楼下时，外面的光一下子涌进来。空地上已经挤满了人。有人抱着孩子，有人蹲在地上哭，有人披着不知道从哪里扯来的毯子。警笛声从远处传过来，高楼还在余震里轻轻哼。街对面的奶茶店碎了一整面玻璃，白色的吸管和塑料杯滚到马路牙子下面。有人拿扫把把碎片往里拢，但被保安喊着退开。平时被车堵得水泄不通的路口空出一大片，所有人都站在建筑物阴影伸不到的地方，仰头看那些刚才还觉得牢不可破的大厦。</p>
+<p class="short-paragraph">陈姐抓住我的胳膊：&quot;小祝，你没事吧？&quot;</p>
+<p class="short-paragraph">我摇头。</p>
+<p class="short-paragraph">她脸白得厉害，却还在挨个点人头。我走到稍微空一点的地方，弯腰喘气。</p>
+<p class="short-paragraph">手机屏幕已经被消息塞满。妈妈连着发了两条消息，第一条只有我的名字：&quot;书禾？&quot;第二条隔了不到一分钟：&quot;看到回我。&quot;晓宁那边更乱，三个问号后面跟着一句：&quot;江城地震了？&quot;紧接着又问我下楼没有。</p>
+<p class="short-paragraph">我先给妈妈回了一句：&quot;出来了，没事。&quot;又点开晓宁的头像，也只发了两个字：&quot;没事。&quot;消息刚送出去，她几乎秒回：&quot;没事就好，你吓死我了。&quot;紧接着手机又震了一下。她说：&quot;回来吧别留在江城了。&quot;</p>
+<p class="short-paragraph">手指往上滑时，通讯录搜索栏里还留着中午误触出来的名字。</p>
+<p class="short-paragraph">江跃。</p>
+<p class="short-paragraph">世界还在剧烈晃动，身边是奔逃的人群，我站在那里，像站在无关于己的逃难之外。我看着那两个字，心脏忽然跳得比刚才跑楼梯时更快。她住在江城的老城区，更加危险，她会不会出事呢？</p>
+<p class="short-paragraph">我点进聊天框。我在输入框里敲下&quot;你还好吗&quot;，看了两秒，又一个字一个字删掉。过了一会儿又打：&quot;刚刚地震了，你没事吧？&quot;我盯着空白输入框，手指冰凉。</p>
+<p class="short-paragraph">旁边有人嚎啕大哭。一个年轻男人接通电话以后蹲在地上反复说&quot;妈，我没事&quot;。远处救护车鸣笛，路边店招还在晃。死亡刚刚离我那么近，死神再伸长一点骷髅爪子就能抓住我。</p>
+<p class="short-paragraph">手机忽然响了，我吓了一跳。来电显示是晓宁。</p>
+<p class="short-paragraph">&quot;你真没受伤？&quot;</p>
+<p class="short-paragraph">&quot;没有。&quot;</p>
+<p class="short-paragraph">&quot;有没有玻璃划到？头晕不晕？&quot;</p>
+<p class="short-paragraph">&quot;都没有。&quot;</p>
+<p class="short-paragraph">她长出一口气，然后很凶地说：&quot;那就好。你们周组刚在群里艾特你项目资料备份没有，王姐告诉我她怼了他一句&#x27;祝书禾那里都地震了，你还催她&#x27;。&quot;</p>
+<p class="short-paragraph">我觉得眼睛忽然有点热。晓宁听见我吸鼻子的声音，安静了一会儿。</p>
+<p class="short-paragraph">&quot;书禾。&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;不要留遗憾，不管你做什么决定我都支持你。&quot;</p>
+<p class="short-paragraph">我握紧手机。电话挂断以后，我缓慢地输入一串手机号码，弹出的那个名字不知为什么在这个动荡的世界里激出我更多泪来。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-4">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-4"><h2 class="chapter-heading" id="chapter-4">4. 江跃｜碎玻璃上的旧杂志</h2><p class="short-paragraph">地震来的时候，我正在改第七版。</p>
+<p class="short-paragraph">讲真，第七版这三个字已经很有灾难片气质了，只是我没想到老天爷真的会亲自下场做导演。</p>
+<p class="short-paragraph">桌子先晃了一下的时候我还以为楼上又在拖柜子。杯子从桌沿滑出去，啪地摔碎。我下意识先去扶电脑，脚下却猛地一歪，膝盖撞到桌角。墙上的拍摄通告簌簌往下掉，口袋里的手机也滑落，屏幕朝地摔在地上。楼道里有人吼：&quot;地震！快下楼！&quot;</p>
+<p class="short-paragraph">我脑子终于上线——地震？怎么会地震了？书架最上面那只旧纸箱整个翻下来，砸在地板上。电影票、坏耳机、废手账本滚了一地，一本泛黄的杂志从里面滑出来，正好摊在碎玻璃旁边。</p>
+<p class="long-paragraph">我猛地站起，却因为久坐而头晕耳鸣。封面晒得发白，右下角有一块深色水渍。我几乎立刻认出来——高中阅览室那本杂志后来报废，老师让当废纸处理，我和祝书禾凑了两块钱&quot;赎&quot;回来。江跃出一块五，祝书禾五毛，因为她那天零钱不够。阿芮当时从前排转过来笑了我们一天，说第一次见有人众筹垃圾。</p>
+<p class="short-paragraph">墙上挂钟也掉了，房间彻底变成难以下脚的废墟。我蹲下去捡手机。膝盖刚碰到地面，尖锐的疼一下钻上来。杯子摔碎的玻璃碴划破了皮，血珠很快冒出来。我抓起手机往门外跑，跑出两步，又回头。杂志还摊在地上。</p>
+<p class="short-paragraph">风从开着的窗户灌进来，纸页被掀起，哗啦翻了几张，停在折过角的那一页。十八岁的我看完那篇故事，嫌作者写得俗，给女孩安排那么多狗血的情节。祝书禾没理我，只把书页折起一个很小的角。</p>
+<p class="short-paragraph">&quot;你折它干嘛？&quot;</p>
+<p class="short-paragraph">&quot;怕下次找不到。&quot;</p>
+<p class="short-paragraph">&quot;你喜欢？&quot;</p>
+<p class="short-paragraph">她不说话。</p>
+<p class="short-paragraph">楼道里又有人喊。我冲回去把杂志捞起来，胡乱塞进怀里。</p>
+<p class="short-paragraph">六楼没有电梯。平时爬得要死要活，真逃命时竟然跑得飞快。隔壁阿姨穿着拖鞋，手里还拎着锅铲；三楼那个总在半夜弹吉他的男生抱着一只猫，猫趴在他肩上炸毛，怎么都按不住。我跟着人群冲到空地，心才安定了一些。</p>
+<p class="short-paragraph">手机有十几个未接来电。江婷女士七个，阿芮三个，还有两个陌生号码。我先给妈妈回电话。她秒接。</p>
+<p class="short-paragraph">&quot;江跃！&quot;声音炸得我把手机拿远了一点。</p>
+<p class="short-paragraph">&quot;在在在，活着。&quot;</p>
+<p class="short-paragraph">&quot;你在哪？伤着没有？我刚看新闻说江城——&quot;</p>
+<p class="short-paragraph">&quot;膝盖划伤了一点，不严重。&quot;</p>
+<p class="short-paragraph">&quot;什么叫一点？流血没有？&quot;</p>
+<p class="short-paragraph">&quot;流了。&quot;</p>
+<p class="short-paragraph">&quot;找医护人员，别自己挑玻璃！还有别站楼底下，去空旷地方......&quot;她一口气说了半分钟。&quot;没事就好没事就好。&quot;她的声音忽然低下去，&quot;妈妈刚才真吓死了。&quot;</p>
+<p class="short-paragraph">我鼻子猛地一酸，赶紧笑：&quot;江婷女士，不要趁灾煽情。&quot;</p>
+<p class="short-paragraph">&quot;谁跟你煽情。去处理伤口。&quot;</p>
+<p class="short-paragraph">&quot;知道。&quot;</p>
+<p class="short-paragraph">电话一挂，阿芮又打进来。她长长吐了口气，&quot;谢天谢地你终于接电话了，你在哪？&quot;我说在家。</p>
+<p class="short-paragraph">&quot;阿姨刚在高中群里问有没有江城的，顺手把我抓出来了。她一直记得我，吓人吧。&quot;</p>
+<p class="short-paragraph">&quot;她竟然知道你？&quot;</p>
+<p class="short-paragraph">&quot;可能因为当年你俩逃眼操，我是那个替你们打掩护，跟值日生说&#x27;她们去厕所了&#x27;的倒霉蛋。后来有次家长会还把我拉出来和你俩并列。&quot;</p>
+<p class="short-paragraph">我怔了一下。&quot;有这事？&quot;</p>
+<p class="short-paragraph">&quot;你当然不记得。你俩的青春片里，群众演员不配拥有姓名。&quot;她阴阳怪气地呛声。</p>
+<p class="short-paragraph">我笑了起来。阿芮听见，语气轻松下来：&quot;你家附近便利店应该有碘伏。受伤了去弄伤口。&quot;</p>
+<p class="short-paragraph">&quot;知道了。&quot;</p>
+<p class="long-paragraph">街口的广告牌还在轻轻晃。一个小孩坐在爸爸肩上舔棒棒糖，糖纸被风吹得簌簌响。沿街几家店都把卷帘门拉到一半，店员和顾客挤在人行道上。便利店门口的矿泉水被搬空了一层，收银员干脆把整箱水拖到门外。远处又传来一阵短促的警笛，大家都安静下来屏气倾听，随后说话声才慢慢重新浮起来。</p>
+<p class="short-paragraph">过了一会儿，阿芮说：&quot;小书也在江城。&quot;</p>
+<p class="short-paragraph">&quot;我知道。&quot;</p>
+<p class="short-paragraph">&quot;联系了吗？&quot;</p>
+<p class="short-paragraph">&quot;没有。&quot;</p>
+<p class="short-paragraph">&quot;你俩挺厉害。高中坐同桌的时候一天能说八百句话，现在打个电话报个平安都得先互相客气，你猜我猜。&quot;</p>
+<p class="short-paragraph">我没说话。真的只是报个平安那么简单？</p>
+<p class="short-paragraph">就在这时，手机顶端跳出一条通话记录。十分钟前，一通没有接通的电话。祝书禾。我盯着那三个字，后背一下挺直。</p>
+<p class="short-paragraph">&quot;阿芮。&quot;</p>
+<p class="short-paragraph">&quot;嗯？&quot;</p>
+<p class="short-paragraph">&quot;她打过了。&quot;</p>
+<p class="short-paragraph">那头安静一秒。&quot;那还跟我废什么话，挂了挂了。&quot;</p>
+<p class="short-paragraph">我被她气笑，手指却已经点进聊天框。上一次对话停在四年前，我在输入框里敲下她的名字：&quot;祝书禾。&quot;发送。</p>
+<p class="short-paragraph">小小的圆圈转了很久。那几秒里，我想起很多很多事，像尘埃一样环绕着我。
+圆圈终于消失了。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-5">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-5"><h2 class="chapter-heading" id="chapter-5">5. 祝书禾｜被划掉的远方</h2><p class="short-paragraph">电话没打通。我盯着&quot;呼叫失败&quot;四个字看了几秒，心里反而松了一口气。很卑鄙的一口气。至少不是她没接。</p>
+<p class="short-paragraph">空地上临时拉起了警戒线。陈姐让大家先别回楼里，能回家的回家，外地出差的等统一安排。我坐在花坛边，手上还攥着工牌，塑料卡套被汗浸得发黏。</p>
+<p class="short-paragraph">手机又震了一下。晓宁问我：&quot;联系上了吗？&quot;</p>
+<p class="short-paragraph">我看了一眼，没有回。</p>
+<p class="short-paragraph">风还在耳畔呼呼刮着。我闭上眼，脑子里却不是刚才逃生的楼梯，而是高三那间永远亮得过分的教室。月考成绩单在班里传了一圈，最后落到我和江跃桌上。她拿红笔在我的总分旁边画了个圈。</p>
+<p class="short-paragraph">&quot;稳过你想去的大学分数线。&quot;</p>
+<p class="short-paragraph">&quot;还没高考说不准。&quot;</p>
+<p class="short-paragraph">&quot;你少谦虚。&quot;她把笔转了一圈，&quot;等考完我们去银江滩，就当作毕业旅行吧。&quot;</p>
+<p class="short-paragraph">我们有一本共享的&quot;要去的地方&quot;。其实就是我拿草稿纸抄的一张城市名单，后来被她抢过去加了很多奇怪备注。厦门——吃海鲜。大理——不许跟团。漠河——看雪和极光！喀什——太远了所以一定要去。最上面还有一条：南城大学图书馆。那是我写的。</p>
+<p class="short-paragraph">江跃发现以后笑我：&quot;别人愿望都是去景点，你愿望去图书馆，书呆子真是名副其实呀。&quot;</p>
+<p class="short-paragraph">&quot;你别乱看。&quot;</p>
+<p class="short-paragraph">&quot;共享的。现在也是我的。&quot;</p>
+<p class="short-paragraph">那时候我们真的相信一辈子很长。长到足够去完所有地方，足够犯很多错，足够等一个人慢慢变勇敢。更重要的是我们会一起度过很长很长的时间。</p>
+<p class="short-paragraph">后来高考结束，我没有填南城大学，自然也没有录取。我妈坐在电脑旁边陪我报志愿。她没有逼我，只是一遍遍问。</p>
+<p class="short-paragraph">&quot;那么远，你一个人行吗？&quot;</p>
+<p class="short-paragraph">&quot;虹城大学也很好，专业差不多。&quot;</p>
+<p class="short-paragraph">&quot;女孩子在外面，离家太远有事怎么办？&quot;</p>
+<p class="short-paragraph">每一句都很合理。合理到最后，我甚至觉得想去南城的自己很任性。</p>
+<p class="short-paragraph">晚上十一点，江跃给我发消息。你没有录取南城大学吗？我说：嗯。她追问我为什么，又问是不是我自己删了志愿。</p>
+<p class="short-paragraph">我回：&quot;删了。&quot;</p>
+<p class="short-paragraph">她打电话过来。我很难过不想和她掰扯，带着一丝卑鄙的气恼挂了她的电话。江跃锲而不舍，连续打了好几个，我没办法才接了。</p>
+<p class="short-paragraph">&quot;为什么？&quot;她开口就问。</p>
+<p class="short-paragraph">我坐在床边，电脑屏幕还亮着。志愿确认页面已经关掉了，桌面上是我们毕业那天拍的合照。</p>
+<p class="short-paragraph">&quot;虹城也挺好。&quot;</p>
+<p class="short-paragraph">&quot;你不是一直想去南城吗？&quot;</p>
+<p class="short-paragraph">&quot;现在不想了。&quot;</p>
+<p class="short-paragraph">电话那头我能听到她平复情绪的呼吸声，她说：&quot;你撒谎。&quot;</p>
+<p class="short-paragraph">&quot;我没有。&quot;</p>
+<p class="short-paragraph">&quot;你明明想去。&quot;</p>
+<p class="short-paragraph">&quot;那又怎么样？&quot;</p>
+<p class="short-paragraph">&quot;是不是你妈妈——&quot;</p>
+<p class="short-paragraph">&quot;跟你关系不大吧。&quot;</p>
+<p class="short-paragraph">话一出口，我们都安静了。我到现在都记得我们之间流动的沉默，到底是两个人在为了对错角力，还是她在向我争夺一个出口，我已经分不清了。窗外有蝉叫，风扇咯吱咯吱转。江跃呼吸很重，像刚刚跑过一段路。</p>
+<p class="short-paragraph">&quot;你明明可以去你想去的地方。&quot;</p>
+<p class="short-paragraph">我没说话。</p>
+<p class="short-paragraph">&quot;你每次都是这样。你明明喜欢，非要说不喜欢；明明不想，非要说都可以。祝书禾，你到底有没有一次是替自己选的？&quot;</p>
+<p class="short-paragraph">似乎被踩着尾巴的猫，我应激地反击说：&quot;你以为谁都跟你一样吗？想做什么就做什么，什么都不怕。你当然可以站着说话不腰疼。我不是你，你也不是我，你凭什么置喙我的人生。&quot;</p>
+<p class="short-paragraph">这句话很重。电话那头很久没有声音。</p>
+<p class="short-paragraph">最后江跃说：&quot;行。&quot;只有一个字，却像一截断崖急速下落，隔开我们。我马上后悔了，但我说不出道歉。</p>
+<p class="short-paragraph">半小时以后，她发来一句：对不起。</p>
+<p class="short-paragraph">最后我只回了一句：&quot;我要睡了。&quot;她隔了一会儿说：&quot;晚安。&quot;</p>
+<p class="short-paragraph">后来，她会在我生日发一句生日快乐，我会在新年回她新年快乐。她偶尔给我转展览链接，我说谢谢。我们像两个很有礼貌的陌生人，小心维护着一段已经不知道还能不能叫友情的关系。</p>
+<p class="short-paragraph">大学以后，她朋友圈越来越精彩。摄影棚，凌晨的街，突然去看的海，陌生城市的日落。我每次看到都会想：她真的做到了，她成为了她最想成为的人。只有我还在原地。</p>
+<p class="short-paragraph">手机在掌心震了一下。江跃只发来三个字：&quot;祝书禾。&quot;</p>
+<p class="short-paragraph">我盯着那三个字，泪水再次模糊视线：&quot;我在。&quot;这两个字发出去以后，我手一直在抖。</p>
+<p class="short-paragraph">新的消息跳出来。她问：&quot;你没事吧？&quot;</p>
+<p class="short-paragraph">&quot;出来了。你呢？&quot;</p>
+<p class="short-paragraph">&quot;没事。&quot;</p>
+<p class="short-paragraph">&quot;你受伤了吗？&quot;</p>
+<p class="short-paragraph">&quot;膝盖划了一点。&quot;</p>
+<p class="short-paragraph">&quot;去处理。如果玻璃扎进肉里不要自己挑，找周围医护人员。&quot;</p>
+<p class="short-paragraph">屏幕安静了几秒。</p>
+<p class="short-paragraph">&quot;你还是那么爱管我。&quot;</p>
+<p class="short-paragraph">我吸了吸鼻子：&quot;我不管你了。&quot;</p>
+<p class="short-paragraph">她没有接我的玩笑，只问：&quot;你真没事？&quot;</p>
+<p class="short-paragraph">我下意识又用了最熟练的答案：&quot;没事，我没受伤。&quot;</p>
+<p class="short-paragraph">这次她回得很快：&quot;我问的不是这个。&quot;</p>
+<p class="short-paragraph">周围很吵，有人在统计人数，有人在喊谁的名字。风吹过警戒线，塑料带啪啪作响。我看着屏幕，想起她是能让我暴露自己的人。我打了四个字：</p>
+<p class="short-paragraph">我害怕了。</p>
+<p class="short-paragraph">消息几乎立刻跳出来。江跃说：&quot;我也害怕。&quot;</p>
+<p class="short-paragraph">那一瞬间，我忽然回忆起十八岁时自己说过的那句话——你以为谁都跟你一样，什么都不怕。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-6">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-6"><h2 class="chapter-heading" id="chapter-6">6. 江跃｜夜奔的人</h2><p class="short-paragraph">碘伏碰上伤口，我疼得吸了口凉凉。店老板递给我一根棉签：&quot;姑娘，轻点。&quot;</p>
+<p class="short-paragraph">&quot;我已经很轻了。&quot;</p>
+<p class="short-paragraph">老板也没放在心上，转身去搬矿泉水，好像刚才只是在说一件再普通不过的事。</p>
+<p class="short-paragraph">我低头看手机。屏幕上还停着祝书禾刚刚发来的那句话：&quot;我害怕了。&quot;</p>
+<p class="short-paragraph">高中三年，她很少承认害怕。考试前手心都是汗，她说还好；被老师点名，耳朵红透了，她说没关系；第一次跟我逃眼操，被值日生追到露台，她扶着墙喘了半天，缓过来第一句竟然是：&quot;会不会扣班级分？&quot;</p>
+<p class="short-paragraph">我当时笑得差点蹲到地上。&quot;祝书禾，你能不能先关心一下自己会不会被抓？&quot;</p>
+<p class="short-paragraph">&quot;还不是你拉我出来的。&quot;</p>
+<p class="short-paragraph">&quot;你也可以不跟过来。&quot;</p>
+<p class="short-paragraph">我觉得她胆小，觉得她只是缺一个拉她的人。于是我很自然地把自己放在前面——我跑，她跟；我闯祸，她皱着眉收拾残局；我说以后去很远的地方，她只管点头同意。</p>
+<p class="short-paragraph">第一次逃眼操也是我起的头。音乐一响，全班齐刷刷闭眼。我趴在桌上，从手指缝里看后门，值日生还没来，就拿笔戳她胳膊。</p>
+<p class="short-paragraph">&quot;走。&quot;</p>
+<p class="short-paragraph">&quot;去哪？&quot;</p>
+<p class="short-paragraph">&quot;越狱。&quot;</p>
+<p class="short-paragraph">&quot;江跃。&quot;</p>
+<p class="short-paragraph">&quot;嘘。&quot;</p>
+<p class="short-paragraph">我把杂志塞进校服，她嘴上说不去，等我走到后门回头，她已经猫着腰过来了。走廊尽头的露台风很大。我跑得快，祝书禾在后面喊慢点。学生会的人追出来，我回头抓住她的手，她掌心冰凉，全是汗。我们躲进露台角落，背靠着墙笑得直不起腰。</p>
+<p class="short-paragraph">所以高考报志愿时，我才会那么生气。我以为我明明已经把门推开给她看过，她为什么还是不走。</p>
+<p class="short-paragraph">那晚跟她吵完，我把手机扔到床上。江婷在客厅看电视，隔着门问：&quot;又和小书吵架？&quot;我没理。她自己推门进来，手里拿着半个苹果。</p>
+<p class="short-paragraph">&quot;那么晚了，吵什么？&quot;</p>
+<p class="short-paragraph">&quot;她不去南城。&quot;</p>
+<p class="short-paragraph">&quot;哦。&quot;</p>
+<p class="short-paragraph">&quot;哦什么哦？&quot;</p>
+<p class="short-paragraph">江婷咬一口苹果：&quot;她自己的志愿。&quot;</p>
+<p class="short-paragraph">&quot;她明明想去。&quot;</p>
+<p class="short-paragraph">&quot;那也是她自己的。&quot;</p>
+<p class="short-paragraph">我一下更气：&quot;你们大人怎么都这样？&quot;</p>
+<p class="short-paragraph">&quot;哪样？&quot;</p>
+<p class="short-paragraph">我说不出来，抓起枕头砸床：&quot;她明明可以选更好的，她就是不敢。&quot;</p>
+<p class="short-paragraph">江婷看了我一会儿。&quot;你替她可惜啊？&quot;</p>
+<p class="short-paragraph">&quot;我才没有。&quot;</p>
+<p class="short-paragraph">&quot;哦。&quot;</p>
+<p class="short-paragraph">&quot;……有一点。&quot;她继续吃苹果。我越说越委屈：&quot;她明明喜欢，为什么总说不喜欢？明明想要，为什么每次都让？&quot;</p>
+<p class="short-paragraph">&quot;人家怕嘛。&quot;</p>
+<p class="short-paragraph">&quot;谁不怕？&quot;</p>
+<p class="short-paragraph">江婷女士似笑非笑：&quot;你不怕？&quot;</p>
+<p class="short-paragraph">&quot;我当然——&quot;话到嘴边卡住。她笑了。</p>
+<p class="short-paragraph">&quot;江跃，你小学第一次自己坐公交坐过站，回来哭得鼻涕泡都出来了。&quot;</p>
+<p class="short-paragraph">&quot;那是小学三年级！&quot;</p>
+<p class="short-paragraph">&quot;初中去外地比赛，半夜给我打电话说酒店空调有鬼响。&quot;</p>
+<p class="short-paragraph">&quot;那是压缩机！&quot;</p>
+<p class="short-paragraph">&quot;八百米赛前在厕所蹲二十分钟。&quot;</p>
+<p class="short-paragraph">&quot;江婷！&quot;</p>
+<p class="short-paragraph">&quot;叫妈。&quot;</p>
+<p class="short-paragraph">我气得瞪她。她把苹果核丢进垃圾桶，起身前拍了一下我的头。</p>
+<p class="short-paragraph">半夜十二点，我给祝书禾发&quot;对不起&quot;。她回&quot;我要睡了&quot;。我盯着那四个字，把她的聊天置顶取消，眼不见为净。</p>
+<p class="short-paragraph">第二天到学校拿毕业材料，阿芮在走廊碰见我，问：&quot;你跟小书怎么一前一后来，演陌生人？&quot;</p>
+<p class="short-paragraph">&quot;关你什么事。&quot;</p>
+<p class="short-paragraph">那时候我们谁都以为，过几天就会好。后来几天变成几个月，几个月变成几年。我一直把这件事讲成一个很简单的故事：祝书禾不想去，我替她着急；她嫌我站着说话不腰疼，我们就散了。简单的故事比较好记，也比较方便把自己放在正确的一边。</p>
+<p class="long-paragraph">可这些年我偶尔也会想起另一件事——我其实羡慕她。羡慕她有一条看得见的路，有成绩，有家里替她操心，有一种即使停下来也不至于立刻掉下去的生活。而十八岁的我已经把话说得太满了。我要去远方，我不要按别人说的活，我才不要过一眼望到头的人生。话说得太满，人就不太好回头了。</p>
+<p class="short-paragraph">手机又震了一下。阿芮问：&quot;小书回你没有？&quot;</p>
+<p class="short-paragraph">&quot;回了。&quot;</p>
+<p class="short-paragraph">阿芮那边刚消停，祝书禾的消息又跳出来，问我现在在哪。</p>
+<p class="short-paragraph">&quot;老城区。&quot;</p>
+<p class="short-paragraph">&quot;我在城西。&quot;</p>
+<p class="short-paragraph">地图上隔着很长一段路。震后交通管制，几条主路都红了。天已经开始暗了，几栋楼没有恢复供电，窗户一格一格黑着，偶尔亮起手机手电筒的白光。</p>
+<p class="short-paragraph">我盯着地图上那段距离看了一会儿，犹豫了还是问她：&quot;见面吗？&quot;</p>
+<p class="short-paragraph">&quot;见。&quot;她几乎没有犹豫。</p>
+<p class="short-paragraph">&quot;银江滩？&quot;</p>
+<p class="long-paragraph">银江滩以前那座卖汽水的旧售票亭早拆了，桥下今天也封了。城市这些年修了又拆，拆了又修，可我们谁都没问为什么是那里。十八岁时，我们在旧杂志的地图上同时看到过那片江滩。我说毕业以后先去最近的，省钱。她说好。那是&quot;要去的地方&quot;里离我们最近的一格，也是一直没有打上的勾。</p>
+<p class="short-paragraph">我把杂志往怀里塞紧一点。边角有点硌着手心。</p>
+<p class="short-paragraph">那天我跑到露台最前面，回头没看见祝书禾时，我又折回去找她。只是这么多年，我把&quot;跑在前面&quot;记得太清楚，忘了&quot;回头找她&quot;。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-7">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-7"><h2 class="chapter-heading" id="chapter-7">7. 祝书禾｜主动选择</h2><p class="short-paragraph">我们约在银江滩旧桥北侧的临时避险点。江跃把定位发过来，顺便嘲笑我：&quot;卖汽水的旧售票亭已经拆八百年了。祝老师，不要活在历史里。&quot;</p>
+<p class="short-paragraph">我看着那句话，不禁露出微笑，很久没这样笑过了。</p>
+<p class="short-paragraph">陈姐走过来时正好看见。</p>
+<p class="short-paragraph">&quot;小祝，家里联系上了？&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;那就好。&quot;她也松了口气，低头看手机，&quot;公司刚说今晚先统一安排酒店。对了，之前和你说过的，项目这边估计还得延两周，你们周组问你能不能继续留。&quot;</p>
+<p class="short-paragraph">我嘴角那点笑慢慢淡下来。</p>
+<p class="short-paragraph">陈姐大概也觉得时机不对，赶紧补：&quot;你不用现在答复我，咱们先缓缓情绪，今天吓坏了吧。&quot;</p>
+<p class="short-paragraph">&quot;好。&quot;</p>
+<p class="short-paragraph">她走开以后，周组的消息也来了。</p>
+<p class="short-paragraph">书禾，辛苦。江城这边反馈很好，后面你继续跟最稳妥。返程票先别买？</p>
+<p class="short-paragraph">输入框里，我几乎下意识打出：好的，我可以。打完以后，我没有发送。</p>
+<p class="short-paragraph">屏幕上的七个字很熟悉。我看着它们想起江跃很多年前问我：你到底有没有一次是替自己选的？我把那行字删掉。重新打了一句：&quot;我考虑一下。&quot;</p>
+<p class="short-paragraph">风吹得手指有点凉。我站在震后的城市里，周围一切都乱七八糟。交通管制，路牌歪斜，人群聚在空地，远处还有警笛。这世界上没有任何东西平稳不可撼动。楼会塌，灯会灭，工作会延期，计划会被打乱。人不可能靠永远这样活一辈子。</p>
+<p class="short-paragraph">我低头重新打字。</p>
+<p class="short-paragraph">周组，抱歉。我会按原计划完成现有事项并交接，后续我会线上配合和更进。手指悬在发送键上，心跳得很快。</p>
+<p class="short-paragraph">我突然又想起一个很小的事。那件事我以前几乎忘了。高二那年，我们逃眼操被学生会记了名字。江跃跑得快，没看清胸牌，我的名字却被记下来了。第二天班主任把我叫去办公室。</p>
+<p class="short-paragraph">&quot;祝书禾，你也会逃眼操？&quot;</p>
+<p class="short-paragraph">她语气惊讶得好像发现三好学生私藏武器。我站在办公桌前，手心全是汗。老师问：&quot;江跃是不是拉你去的？&quot;</p>
+<p class="short-paragraph">我那时候只要点头，就什么事都没有。全班都知道江跃能干出这种事，老师也知道。江跃站在门外，隔着玻璃冲我挤眉弄眼，大概是在暗示我全部推给她。</p>
+<p class="short-paragraph">我看着班主任说：&quot;不是。&quot;</p>
+<p class="short-paragraph">班主任不可思议地抬头。我听见自己的声音发颤：&quot;是我先说想出去的。&quot;</p>
+<p class="short-paragraph">这当然是谎话。老师愣了，门外的江跃也愣了。最后我们两个一起写检查。</p>
+<p class="short-paragraph">出了办公室，她追着我问了一路：&quot;祝书禾你是不是傻？你干嘛给我背锅？&quot;</p>
+<p class="short-paragraph">我那时候怎么回答的？我想了很久。风把一块塑料布吹起来，啪地拍在路边护栏上。我终于想起来了。</p>
+<p class="short-paragraph">我说：&quot;因为这是我自己的选择。&quot;</p>
+<p class="short-paragraph">江跃拉住我的手是一回事，可我自己抬脚跟上，是另一回事。这些年我把所有勇敢都记在她身上，好像只要证明她天生比我自由，我就可以原谅自己一直没有选择。可事实不是这样，我做出过自己的选择。</p>
+<p class="short-paragraph">我按下发送。</p>
+<p class="short-paragraph">消息出去以后，周组没有立刻回。我手心出了一层汗。两分钟后，他发：江城这边确实比较依赖你，临时换人风险大。你再考虑下？</p>
+<p class="short-paragraph">我盯着那句话。以前我会开始替他想：确实难协调；陈姐也很忙；换人还要重新交接；项目出了问题怎么办。</p>
+<p class="short-paragraph">我回他：&quot;我理解。但这次我也坚持。&quot;</p>
+<p class="short-paragraph">发完以后，我把手机锁屏。没有天崩地裂，也没有谁冲过来指责我自私。只有风一如既往地从街口吹过去。原来把&quot;不&quot;字说出口，也不过是这样。</p>
+<p class="short-paragraph">我走到路口，等临时公交。上车前我给江跃发：前面封路，我会晚一点。</p>
+<p class="short-paragraph">手机在掌心震了一下。江跃说：&quot;路上小心，走得慢点。&quot;</p>
+<p class="short-paragraph">我看着这句，想起高中每次她都嫌我慢。我看着那句话笑了一下，回她：&quot;以前不是你总嫌我慢。&quot;她过了半分钟才回，说膝盖疼，今天她也走得慢。随后又补了一句：&quot;但我不想你等我。&quot;</p>
+<p class="short-paragraph">&quot;活该。&quot;</p>
+<p class="short-paragraph">三个问号立刻跳出来。下一条紧跟着：&quot;祝书禾，你学坏了。&quot;</p>
+<p class="short-paragraph">我收起手机，跟着人群上车。</p>
+<p class="short-paragraph">车窗外，震后的江城灰扑扑的。店招歪着，地上散着碎玻璃，路边有人互相递水。临街的药店把急救箱摆到了门口，几个穿睡衣的人裹着毯子坐在台阶上。红绿灯恢复了，车辆却走得很慢，所有人经过高架和旧楼时都下意识抬头。</p>
+<p class="short-paragraph">城市和人一样，都可以在废墟上继续往前。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-8">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-8"><h2 class="chapter-heading" id="chapter-8">8. 江跃｜不是结局</h2><p class="short-paragraph">去银江滩的路上，阿芮骑着共享单车追了我两个路口。</p>
+<p class="short-paragraph">&quot;江跃！&quot;</p>
+<p class="short-paragraph">我回头时，她正一只手扶车把，一只手冲我挥，车筐里的塑料袋被风吹得鼓起来。</p>
+<p class="short-paragraph">&quot;你怎么来了？&quot;</p>
+<p class="short-paragraph">&quot;给伤员送慰问品。&quot;她一个急刹停在我旁边，前轮差点蹭上隔离墩。</p>
+<p class="short-paragraph">&quot;你高中骑车就这样。&quot;</p>
+<p class="short-paragraph">&quot;你高中坐我后座还敢嫌。&quot;</p>
+<p class="short-paragraph">&quot;我什么时候坐过？&quot;</p>
+<p class="short-paragraph">&quot;高二运动会，你脚崴了，小书背不动你，最后谁把你驮回去的？&quot;</p>
+<p class="short-paragraph">我想了半天，没想起来。阿芮翻了个白眼：&quot;很好。群众演员再次被剪掉。&quot;</p>
+<p class="short-paragraph">她把袋子塞给我。碘伏、创可贴、两瓶水，还有一个被压扁的面包。&quot;我处理过了。&quot;</p>
+<p class="short-paragraph">&quot;还是留着说不定又摔跤了。等会儿你要是跟小书一见面抱头痛哭，哭饿了还能垫一口。&quot;</p>
+<p class="short-paragraph">&quot;谁抱头痛哭？&quot;我抬脚要踹她，她推着车往旁边一躲。&quot;腿都这样了还踹，生命力挺旺盛。&quot;</p>
+<p class="short-paragraph">她视线落到我怀里露出来的杂志一角，勾起嘴角：&quot;真把它带出来了。&quot;</p>
+<p class="short-paragraph">&quot;顺手。&quot;</p>
+<p class="short-paragraph">&quot;地震逃命还能顺手带十年前的破杂志。&quot;阿芮才懒得拆穿。</p>
+<p class="short-paragraph">我们沿着辅路慢慢走。她推车，我一瘸一拐。路灯提前亮了，坏掉的几盏把路切成一段亮、一段暗。共享单车的链条偶尔咔哒一声，像有人在旁边不耐烦地打拍子。</p>
+<p class="short-paragraph">&quot;见小书？&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;在哪？&quot;</p>
+<p class="short-paragraph">&quot;银江滩。&quot;</p>
+<p class="short-paragraph">她又走几步说：&quot;旧售票亭早拆了，别约错地方。&quot;</p>
+<p class="short-paragraph">&quot;我知道。&quot;</p>
+<p class="short-paragraph">&quot;你知道，小书不一定知道。她以前记路就靠地标，你之前不是说巷口那棵树砍了以后，她有一个星期都回家迷路。&quot;</p>
+<p class="short-paragraph">我笑了一声：&quot;你倒记得。&quot;</p>
+<p class="short-paragraph">&quot;我当然记得。&quot;阿芮说，&quot;你俩以前以为没人知道你俩关系好，其实显眼得很。&quot;</p>
+<p class="short-paragraph">&quot;哪里显眼？&quot;</p>
+<p class="short-paragraph">&quot;你上课睡觉，她拿书给你挡；她值日擦黑板，你在下面瞎指挥；吵架以后一个从前门走，一个从后门走，恨不得在地上画三八线。&quot;</p>
+<p class="short-paragraph">&quot;有那么夸张？&quot;</p>
+<p class="short-paragraph">&quot;有。&quot;</p>
+<p class="short-paragraph">她说完就低头看手机，不再往下讲。我反而安静了。有些事自己记着，只是一团模糊的旧影子；从另一个人口中说出来，才知道它们当年真的发生过，而且还被别人看见过。</p>
+<p class="short-paragraph">马路对面的绿灯亮了，人群开始往前。阿芮推着车走出去两步，发现我没跟，回头：&quot;怎么了？&quot;</p>
+<p class="short-paragraph">&quot;没什么。&quot;我跟上去。</p>
+<p class="short-paragraph">风从路口横着刮过来。我又捡起话题，&quot;你怎么什么都知道？&quot;</p>
+<p class="short-paragraph">&quot;因为我当年很闲。&quot;她说，&quot;虽然坐前排，但是班里的所有细节和八卦都逃不过我的眼睛。&quot;</p>
+<p class="short-paragraph">到下一个岔路口，她要往另一边走。&quot;到了告诉我。&quot;</p>
+<p class="short-paragraph">&quot;知道了。&quot;</p>
+<p class="short-paragraph">她跨上车，又想起什么似的回头：&quot;江跃。&quot;她已经蹬出去几米，又远远喊了一句：&quot;还有，小书不是来给你重新装修你的失败展览馆的！&quot;</p>
+<p class="short-paragraph">我抓起面包要砸她，想起这是自己的晚饭，又放下。她笑得差点骑歪，很快消失在路口。</p>
+<p class="short-paragraph">我一个人继续往江边走。路灯亮一段，暗一段。我的影子被拉长，又缩回脚边。朋友圈里永远只有亮的那一段：海，日落，凌晨收工后的烧烤摊，陌生城市的路牌。</p>
+<p class="short-paragraph">六月那张&quot;临时起意&quot;的海，其实是甲方凌晨改场地，我坐六小时大巴去补空镜。拍完在车站睡了四十分钟，住宿没报，第二天照样回来改稿。我发照片的时候没觉得自己在骗人。我只是把不好看的部分裁掉了。</p>
+<p class="short-paragraph">十八岁时，我把&quot;夜奔&quot;理解成离开。离开教室，离开规矩，离开别人替我安排好的生活。最好头也不回，最好谁都追不上。后来我真的一直在走。毕业留在江城，做自由职业，搬家，换甲方，凌晨收工，天亮再改。不断向前走，也不断抖落掉人生的碎屑。</p>
+<p class="short-paragraph">不是前面真有什么非去不可的地方，只是我心里不服输也不甘心。好像一停，就会有人从身后追上来，拍拍我肩膀，说：看吧，你也不过如此。最麻烦的是，那个人长着十八岁的我的脸。</p>
+<p class="short-paragraph">我把杂志拿出来。纸页被风吹得发颤。折角还在，像一枚很小的旧伤疤。那篇故事里的女孩坐火车去了南方。十七岁的我最喜欢她头也不回的样子。现在的我却知道她会付出多大的代价。</p>
+<p class="short-paragraph">手机震了一下。妈妈问我去哪。我拍了张江边发过去。她很快追问：&quot;跟谁？&quot;</p>
+<p class="short-paragraph">&quot;祝书禾。&quot;</p>
+<p class="short-paragraph">那头停了几秒。&quot;哦，小书啊。她没事吧？&quot;</p>
+<p class="short-paragraph">&quot;没事。&quot;</p>
+<p class="short-paragraph">过了一会儿，江婷女士又发：你当年还说再也不要和她好了。</p>
+<p class="short-paragraph">我立刻打字反驳：&quot;我什么时候说过？&quot;</p>
+<p class="short-paragraph">江婷女士回得很淡定：&quot;高考完。&quot;下一条更不留情：&quot;哭得眼睛跟兔子一样。&quot;</p>
+<p class="short-paragraph">&quot;造谣。&quot;</p>
+<p class="short-paragraph">我把手机揣回口袋，走出十几步，又掏出来。我先发了一个&quot;妈&quot;。她很快回：&quot;干嘛&quot;</p>
+<p class="short-paragraph">我站在路灯下面，手指在屏幕上停了很久。那句话打出来又删，删完又打，最后还是发了出去。</p>
+<p class="short-paragraph">&quot;妈，你是不是也觉得我选错了？我不该一个人到江城。&quot;</p>
+<p class="short-paragraph">消息送达以后很久没有动静。风从江面卷过来，路灯下的树影晃得厉害，我一边走，一边忍不住把手机拿出来看。走过两盏路灯，手机终于在掌心震了一下。</p>
+<p class="short-paragraph">江婷女士只回了一句：&quot;如果你不喜欢这个结局，那它就不是你的结局。&quot;</p>
+<p class="short-paragraph">我把那句话看了两遍。江风把额前的头发吹乱，屏幕的光落在指节上。一辆救护车从路口开过去，红光从我脸上扫了一遍。一片梧桐叶被风卷下来，碰了碰我的肩，又落到脚边，像是谁隔了那么久轻轻地拍了拍我。</p>
+<p class="short-paragraph">手机又亮。祝书禾说她还有十分钟。我回她：&quot;我到了。&quot;我慢慢在江堤石阶上坐下。膝盖弯起来有点疼。我把那袋面包拆开，咬了一口，干得噎人，又拧开阿芮塞给我的水。</p>
+<p class="short-paragraph">江风很大，来来往往的人很多。原来等一个人的时候，可以清楚得感受到时间滴滴答答地走动。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-9">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-9"><h2 class="chapter-heading" id="chapter-9">9. 祝书禾｜刻在船上的记号</h2><p class="long-paragraph">我还是走错了。江跃明明已经提醒过我，卖汽水的旧售票亭早拆了。可临时公交把人放在银江滩东口，我下车以后看见一排新修的栏杆，身体比脑子更快，顺着记忆里的方向拐了过去。走了十来分钟，我才发现不对。以前售票亭旁边有一棵歪脖子梧桐，树根把水泥地顶出一道裂缝。现在那里立着蓝色的导览牌，下面停着一排共享单车。</p>
+<p class="short-paragraph">我站在那块崭新的导览牌下面，还是给江跃发了消息：&quot;旧售票亭是不是拆了？&quot;</p>
+<p class="short-paragraph">她几乎秒回：&quot;八百年前。&quot;</p>
+<p class="short-paragraph">手机紧接着又震了一下：&quot;祝老师，你到底活在哪一年？&quot;</p>
+<p class="short-paragraph">我站在导览牌下面，忽然不知道怎么回。江风从水面上来，吹得手机发凉。我好像真的活在很多年前。至少关于江跃的那一部分是。</p>
+<p class="long-paragraph">我记得学校小卖部里有个旧冰柜。夏天玻璃门全是白雾，江跃每次都要蹲下来研究最下面那排雪糕，研究半天，最后还是买一块钱的老棒冰。记得她高二剪坏过一次头发，第二天戴着帽子来学校，阿芮从前门一路追到后门想看，被她拿练习册打了好几下。记得她跑起来很快。记得她笑的时候先眯左边的眼睛。记得她喜欢吃香菜，数学选择题不会做就转笔，笔掉了弯腰去捡，捡起来接着转。</p>
+<p class="short-paragraph">这些我都记得。可我不知道她现在头发多长，不知道她现在的口味，不知道她住的六楼窗户朝哪边，也不知道她熬夜改稿时喝咖啡还是茶。我知道那么多江跃的事，又像一件都不知道。</p>
+<p class="short-paragraph">江水就在栏杆外面往前走。小时候学&quot;刻舟求剑&quot;，我觉得那个楚人笨得不可思议。剑从这里掉下去，就在船上刻一道痕；等船靠岸，再照着痕迹下水找。船已经走了，他怎么会不知道？</p>
+<p class="short-paragraph">这么简单的道理。我低头看着自己的鞋尖，忽然觉得脸有点热。</p>
+<p class="short-paragraph">这些年我也刻了很多记号。十六岁的江跃在露台上。十七岁的江跃在阅览室里。十八岁的江跃隔着电话问我为什么删志愿。二十一岁的江跃问我暑假回不回家。最后一道刻在四年前。</p>
+<p class="short-paragraph">后来我毕业、入职、搬家，学会填越来越复杂的表，学会在会议上点头，学会把&quot;不想&quot;咽回去。偶尔想起她，我就回到那些记号旁边看一眼。我一直以为记号还在，人就还在那里。</p>
+<p class="short-paragraph">可人又不是掉进水里的剑。她也在往前走。她有我不知道的早晨和深夜，有新认识的人。她会喜欢以前不喜欢的东西，会后悔，会害怕，也可能早就不相信十七岁时说过的话。而我一直拿十七岁的江跃，去找二十几岁的她。</p>
+<p class="short-paragraph">难怪怎么也找不到。</p>
+<p class="short-paragraph">手机又震。我还没想好怎么回，她先发来一句：&quot;你别动了。&quot;</p>
+<p class="short-paragraph">紧接着又一条：&quot;发定位，我过去找你。&quot;</p>
+<p class="short-paragraph">我看着&quot;我过去找你&quot;，鼻子一酸。很久以前也总是这样。我走慢了，她折回来；我不敢往前，她伸手拉我。可这一次我不想站在原地。</p>
+<p class="short-paragraph">我把定位发给她，又补一句：不用，我往北走。我们中间见。</p>
+<p class="short-paragraph">江跃回了一个问号。我没解释。重新系好松掉的鞋带，沿江往前。</p>
+<p class="long-paragraph">走出去几步，我感到很难过。不是因为她变了，是因为直到这一刻我才真正明白，她已经活过了那么多年，而那些年里没有我。对我很重要的人，我很早以前就见过了。见过她十六岁趴在课桌上睡觉，见过她十七岁跑过长长的走廊，见过她站在露台上说以后要去很远的地方。</p>
+<p class="long-paragraph">每一个晚自习，每一次放学，每一根吃完随手丢掉的冰棍木棍都很普通。人不会在一个普通的下午突然知道，这是最后一次一起回家；也不会在挂掉一通电话以前收到提醒，说你最好再多说一句，因为下一次听见这个人的声音，要等很多很多年。我们总是事情过去以后，才明白只是当时已惘然。</p>
+<p class="short-paragraph">可我不能沿着江水倒着走回去。也不能回到十八岁，再看她一眼。我能去见的，只有现在这个江跃。</p>
+<p class="long-paragraph">前面有人逆着人群走过来。隔得远，我先看见她怀里夹着一本书。再近一点，看见膝盖上白色的纱布，看见头发被风吹得乱七八糟。她走得比记忆里慢。我没有立刻喊她。她也在四处看，目光从一个又一个人脸上掠过去。我不再寻找旧日的影子，只是看着这个正在向我走来的人。</p>
+<p class="short-paragraph">然后她看见了我。左边的眼睛先弯起来，笑颜灿烂。</p>
+<p class="short-paragraph">&quot;祝书禾！&quot;</p>
+<p class="short-paragraph">声音穿过风和人群，横冲直撞，一如往昔。</p>
+<p class="short-paragraph">我们向彼此走去。四年没有说的话堵在中间，最后是她先低头看我的工牌。</p>
+<p class="short-paragraph">&quot;你逃命还带员工证？&quot;</p>
+<p class="short-paragraph">&quot;忘了摘而已。&quot;</p>
+<p class="short-paragraph">&quot;真敬业啊。&quot;</p>
+<p class="short-paragraph">我看她怀里的杂志：&quot;你逃命还带这个。&quot;</p>
+<p class="short-paragraph">她低头：&quot;文物抢救。&quot;</p>
+<p class="short-paragraph">我笑了。她也笑。那一点陌生忽然松开一道缝。风把我们的头发吹到一起，她抬手在我肩膀上拍了一下，很轻。</p>
+<p class="short-paragraph">&quot;真没事？&quot;</p>
+<p class="short-paragraph">&quot;没事。&quot;</p>
+<p class="short-paragraph">&quot;我问的不是这个。&quot;</p>
+<p class="short-paragraph">我低头，眨了眨湿润的眼睛。&quot;你怎么还是要问第二遍。&quot;</p>
+<p class="short-paragraph">&quot;因为你第一遍还是会说假话。&quot;</p>
+<p class="short-paragraph">我们并肩坐到江堤石阶上，中间放着那本旧杂志，像高中并排趴在桌上时，中间刚好够塞下一本书。</p>
+<p class="short-paragraph">她把杂志推给我。&quot;还认得吗？&quot;</p>
+<p class="short-paragraph">书页已经黄了，边缘发脆。夜奔那一页还留着我当年折的小角。我用指腹摩挲。</p>
+<p class="short-paragraph">&quot;你居然没扔。&quot;</p>
+<p class="short-paragraph">&quot;搬家几次都没扔。&quot;她说，&quot;可能比较恋旧，也可能纯粹懒。&quot;</p>
+<p class="short-paragraph">这就很江跃。</p>
+<p class="short-paragraph">我笑了一会儿，才说：&quot;我一直以为你后来真的夜奔了。&quot;</p>
+<p class="short-paragraph">&quot;什么意思？&quot;</p>
+<p class="short-paragraph">&quot;留在江城，做自己喜欢的事情，到处跑。&quot;我望着江面，&quot;我看你朋友圈，总觉得你活成了以前说的那种人。&quot;</p>
+<p class="short-paragraph">&quot;哪种人？&quot;</p>
+<p class="short-paragraph">&quot;自由的人。&quot;</p>
+<p class="short-paragraph">她从脚边捡起一颗小石子，在手里转了两圈。&quot;那你被我骗得挺成功。&quot;石子被她扔出去，落进黑下来的江水，声音很快就被风吃掉。</p>
+<p class="short-paragraph">&quot;真实的生活是这样：六月那张海是甲方半夜改场地，我坐六小时大巴去补空镜。第七版到今天还没过。房东昨天通知我下个月搬家。&quot;</p>
+<p class="short-paragraph">我转头看她：&quot;你朋友圈……&quot;</p>
+<p class="short-paragraph">&quot;能发的才发。&quot;她说，她低头抠杂志翘起的纸角。&quot;我还羡慕你呢。&quot;</p>
+<p class="short-paragraph">&quot;我？&quot;</p>
+<p class="short-paragraph">&quot;嗯。工资按时发，有办公室，我不喜欢这样的生活，但我有时候真羡慕你。&quot;</p>
+<p class="short-paragraph">我摸到胸前的工牌。塑料卡套上有一道今天蹭出来的划痕。</p>
+<p class="short-paragraph">&quot;领导刚让我再留两周。&quot;</p>
+<p class="short-paragraph">&quot;你答应了？&quot;</p>
+<p class="short-paragraph">&quot;没有。&quot;</p>
+<p class="short-paragraph">她猛地转头。&quot;你？&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">她拍着我的肩哈哈大笑：&quot;地震把你哪根筋震通了？&quot;</p>
+<p class="short-paragraph">我本来想反驳，最后也笑了。风越来越大。我伸手进口袋，摸到早上随手塞进去的薄荷糖。</p>
+<p class="short-paragraph">&quot;给你。&quot;</p>
+<p class="short-paragraph">江跃接过去，拆开塞进嘴里，嚼了两下，眉毛立刻皱起来。&quot;这糖怎么像牙膏？&quot;</p>
+<p class="short-paragraph">我笑得肩膀发抖。&quot;那你吐掉。&quot;</p>
+<p class="short-paragraph">她嫌弃得要命，却还是继续嚼。&quot;算了。四年没收过你的东西，浪费不太好。&quot;</p>
+<p class="short-paragraph">笑声一下轻下来。她大概也觉得这句话有些伤感，低头把糖纸折了两折。</p>
+<p class="short-paragraph">江水在下面一阵一阵响。过了很久，我说：&quot;江跃。&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;</p>
+<p class="short-paragraph">&quot;那年志愿的事，我一直觉得你对我很失望。&quot;</p>
+<p class="short-paragraph">她手里的糖纸停住。&quot;是有点。&quot;</p>
+<p class="short-paragraph">我的心缩了一下。她又说：&quot;但我那时候也挺讨厌的。我那时候把话说得太满了。总觉得想要就该去拿，怕就是没出息。后来才发现，我也怕。&quot;</p>
+<p class="short-paragraph">我想起下午手机上那句&quot;我也害怕&quot;。</p>
+<p class="short-paragraph">&quot;你以前不承认。&quot;</p>
+<p class="short-paragraph">&quot;承认了还怎么在你面前装英雄。&quot;</p>
+<p class="short-paragraph">我正要反驳，脑中浮现出高二那间办公室。我把替她认下逃眼操的事说了。</p>
+<p class="short-paragraph">江跃听到一半就坐直。&quot;你居然还记得？&quot;</p>
+<p class="short-paragraph">&quot;今天才想起来。你也记得？&quot;</p>
+<p class="short-paragraph">&quot;我当然记得。&quot;她说，&quot;你那天耳朵红得跟要烧起来一样，还跟老班说是你先提的。我在门外都傻了。&quot;</p>
+<p class="short-paragraph">&quot;你后来骂我傻。&quot;</p>
+<p class="short-paragraph">&quot;因为你确实——&quot;</p>
+<p class="short-paragraph">我看她。她把后半句咽回去，笑得肩膀发抖。&quot;行，不傻。&quot;</p>
+<p class="short-paragraph">风正好从江面吹上来。那些话随着风经过了无数人群，高山深谷，乌云踏雪，漫长的等待后才传到另一个人的耳边，像一件我很早以前丢掉、已经不记得的东西，被人好好收着，今天才还给我。</p>
+<p class="short-paragraph">我低头摸了摸杂志的折角，如同楚人在船舷上刻下的刀痕。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a><a href="#chapter-10">下一章 →</a></nav></section><section class="novel-chapter" aria-labelledby="chapter-10"><h2 class="chapter-heading" id="chapter-10">10. 江跃｜我等你</h2><p class="short-paragraph">祝书禾低头摸着那道折角，很久没说话。我想起另一件她多半忘了的事。</p>
+<p class="short-paragraph">高三冬天，我参加了一个校外摄影比赛。决赛和月考撞期，班主任把报名表还给我，说高三了，别为了这些&quot;不要紧的东西&quot;分心。我嘴上说无所谓，回教室以后把报名表揉成一团塞进抽屉。</p>
+<p class="short-paragraph">下课铃响，祝书禾从书包里抽出一张新的报名表，压在我练习册上。</p>
+<p class="short-paragraph">&quot;干嘛？我不去了。&quot;</p>
+<p class="short-paragraph">&quot;哦。&quot;</p>
+<p class="short-paragraph">她坐回去继续写题。我憋了一会儿：&quot;你不劝我？&quot;</p>
+<p class="short-paragraph">&quot;你又不会听。&quot;</p>
+<p class="short-paragraph">&quot;那你打印它干嘛？&quot;</p>
+<p class="short-paragraph">她笔尖停了一下，抬头看我。&quot;万一你明天又想去了呢？&quot;</p>
+<p class="short-paragraph">第二天我真的去了。三等奖，奖品是一只丑得很有记忆点的保温杯。后来搬家时阿芮看见，问我怎么还留着，我说质量好。其实质量一般，第三年就漏水了，总归是纪念。</p>
+<p class="short-paragraph">&quot;还有摄影比赛。&quot;我说。祝书禾果然一脸茫然：&quot;什么？&quot;我把事情讲了一遍。她听完只说：&quot;有吗？&quot;</p>
+<p class="short-paragraph">&quot;你看。&quot;我指她，&quot;你就是这样。&quot;</p>
+<p class="short-paragraph">&quot;哪样？&quot;</p>
+<p class="short-paragraph">我想说，你总把自己做过的事忘掉。话到嘴边，又觉得没必要。我把杂志往她那边推了推：&quot;没什么。记性差。&quot;</p>
+<p class="long-paragraph">桥灯落在她侧脸上。她当然不是十八岁的样子了。眼下有很淡的青，头发比高中长，衬衫袖口沾了一点灰。可她紧张时还是会捏手指，听人说话时还是微微偏着头。人从来不是从旧壳里彻底换成另一个人，更像江水一直往前，你不可能认出从前流过你面前的那滴水，偏偏你又认得月亮照下来时江水的样子。</p>
+<p class="short-paragraph">&quot;你现在还想去南城吗？&quot;我问。</p>
+<p class="short-paragraph">她愣了愣。&quot;都多少年了。&quot;</p>
+<p class="short-paragraph">&quot;我也是随便问问。&quot;</p>
+<p class="short-paragraph">她望着江面。桥上的灯被水切得很碎，一块亮，一块暗。&quot;不知道。&quot;</p>
+<p class="short-paragraph">我点头说：&quot;我们一起去你想去的图书馆吧。&quot;她转过来看我：&quot;你不说我口是心非了？&quot;</p>
+<p class="short-paragraph">&quot;不了。&quot;</p>
+<p class="short-paragraph">&quot;为什么？&quot;</p>
+<p class="short-paragraph">&quot;因为我现在也有很多不知道。&quot;</p>
+<p class="short-paragraph">她笑了一下：&quot;比如？&quot;</p>
+<p class="short-paragraph">&quot;比如下个月住哪。&quot;</p>
+<p class="short-paragraph">&quot;这个确实比较紧急。&quot;</p>
+<p class="short-paragraph">&quot;比如还要不要一直做自由职业。&quot;</p>
+<p class="short-paragraph">她没马上接话。我低头看膝盖上的纱布。白色边缘已经蹭灰了。</p>
+<p class="short-paragraph">&quot;这几年我依然不会安定下来，我还是想做自己喜欢的事情。现在的工作和生活我并不喜欢。&quot;</p>
+<p class="short-paragraph">没有十八岁的我从杂志里跳出来骂我没出息。祝书禾只是问：&quot;那你喜欢什么呢？&quot;</p>
+<p class="short-paragraph">&quot;这就是难点啊，我不知道，像走进一条漆黑的隧道，我知道前面有路却不知道还要走多久。&quot;</p>
+<p class="short-paragraph">&quot;嗯。&quot;她很认真地点头，&quot;是不容易。&quot;</p>
+<p class="short-paragraph">我侧过脸看她。她没有劝我考编或者说自己的生活，也没有替我规划下一步。</p>
+<p class="short-paragraph">&quot;书呆子。&quot;</p>
+<p class="short-paragraph">&quot;嗯？&quot;</p>
+<p class="short-paragraph">&quot;我以前是不是把夜奔太当一回事了？&quot;</p>
+<p class="short-paragraph">她低头看杂志。&quot;什么意思？&quot;</p>
+<p class="short-paragraph">&quot;就这篇。&quot;我用手指点点那一页，&quot;非得头也不回，非得跑到谁都找不到，好像回头就不算勇敢。&quot;</p>
+<p class="short-paragraph">祝书禾摸着折角：&quot;我以前很喜欢这个故事，因为她让我看到另一个人生。我现在还是喜欢，你呢？&quot;</p>
+<p class="short-paragraph">我认真想了想。&quot;现在觉得她最好别走到一个没有人认识她的地方，不用做一个没有过去的人。&quot;</p>
+<p class="short-paragraph">祝书禾笑出声。&quot;很破坏文学性。&quot;</p>
+<p class="short-paragraph">&quot;生活就是比较破坏文学性。&quot;</p>
+<p class="short-paragraph">她笑得低下头。我也笑。</p>
+<p class="short-paragraph">笑声被风吹散以后，江边安静了一会儿。我忽然明白为什么地震时会想起她。不是因为她能替我解决什么。她不能替我交房租，不能让甲方突然长出良心，也不能把我送回十八岁。恰恰相反。她让我没办法只记得十八岁的自己。</p>
+<p class="long-paragraph">我记得我拉她跑，也记得她替我认错；记得我劝她去南城，也记得她替我重新打印报名表。那些被我讲了很多年的故事，一旦重新有个人把记忆拼凑完整，我的版本和我的叙述就不再真实。我并不是永远勇敢，她也不会停在原地。我们都不是对方以为的样子，像在时间长河里镜子的一体双面。</p>
+<p class="short-paragraph">临时避险点的广播响起来，提醒大家不要在江边久留。</p>
+<p class="short-paragraph">祝书禾把杂志合上，递给我。&quot;走吧。&quot;</p>
+<p class="short-paragraph">她站起来，先往前走了两步。我起身时膝盖扯得疼，动作慢了一拍。她回头：&quot;能走吗？&quot;</p>
+<p class="short-paragraph">&quot;能。&quot;</p>
+<p class="short-paragraph">&quot;那快点。&quot;</p>
+<p class="short-paragraph">我故意皱眉：&quot;祝书禾，你现在开始嫌我慢了？&quot;</p>
+<p class="short-paragraph">她居然点头：&quot;有一点。&quot;</p>
+<p class="short-paragraph">&quot;没良心。&quot;</p>
+<p class="short-paragraph">她笑着又走两步。</p>
+<p class="short-paragraph">我看着她的背影想起无数个在路上的时刻，跑操、去食堂、晚起快迟到。那时候总是我拉着她，风很大，我嘴上喊她快点，跑到拐角又忍不住回头。有一次她喘着气问我：&quot;你不会等我吗？&quot;我说：&quot;谁等你。&quot;然后站在原地等了她平复呼吸。</p>
+<p class="short-paragraph">&quot;祝书禾。&quot;</p>
+<p class="short-paragraph">我后面喊。她停下来。</p>
+<p class="short-paragraph">&quot;你可以等我吗？&quot;</p>
+<p class="short-paragraph">风把她的衣角吹起来。她没有立刻回答，只站在那里看我。</p>
+<p class="short-paragraph">那一瞬间，我忽然有点分不清眼前是哪一年。露台，江堤；校服，衬衫；十七岁，二十五岁。很多画面被风吹到一起，又很快散开。可我知道她不是从前那个祝书禾。我也不是从前的江跃。</p>
+<p class="short-paragraph">所以她这次的回答，不是从旧日里随着风传来的。是现在的，如推动江潮的风。</p>
+<p class="short-paragraph">&quot;我等你。&quot;</p>
+<p class="short-paragraph">我笑起来，慢慢朝她走过去。等我走到身边，我们一起往亮着灯的地方去。</p>
+<p class="short-paragraph">怀里的杂志被风吹开，我没有按住，纸页就这样哗啦啦翻过去。夜奔那一页很快被吹到了后面。</p>
+<p class="short-paragraph">前面还有很多页。风从旧日来，相见再重逢。</p><nav class="chapter-nav" aria-label="章节导航"><a href="#novel-contents">↑ 章节目录</a></nav></section></article>
+</main>
+<footer class="reading-footer"><p>读到这里，谢谢你。欢迎来信聊聊你的感受。</p><nav aria-label="阅读结束导航"><a href="../index.html#works">← 返回作品集</a><a href="mailto:xuh93219@gmail.com">写信给一舟 ↗</a><a href="#article">回到开头 ↑</a></nav></footer>
+</body></html>

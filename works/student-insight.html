@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LONG DOCUMENT TEMPLATE · parchment design system
+     多页 A4 白皮书/技术报告/年度总结
+     结构：封面 -> 目录 -> 执行摘要 -> 正文章节 -> 附录
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>大学生群体洞察报告</title>
+<meta name="author" content="一舟">
+<meta name="description" content="研究对象：有社团经历但缺少真实项目成果的大二 / 大三学生。">
+<meta name="keywords" content="用户洞察 · 报告全文">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  
+
+  /* Bold weight - W05 for all bold variants */
+  
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+
+    @top-right {
+      content: string(section-title);
+      font-family: "TsangerJinKai02", "Source Han Serif SC",
+                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-size: 8pt;
+      color: #6b6a64;
+    }
+
+    @bottom-center {
+      content: counter(page) "  ·  大学生群体洞察报告";
+      font-family: "TsangerJinKai02", "Source Han Serif SC",
+                   "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  @page:first {
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+    --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm 22mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+  }
+
+  .sans {
+    font-family: var(--sans);
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40mm 0 0 0;
+    break-after: page;
+  }
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8pt;
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 18pt;
+  }
+  .cover-eyebrow::before {
+    content: "";
+    width: 9pt;
+    height: 1.5pt;
+    border-radius: 0.75pt;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.15;
+    letter-spacing: 0.3pt;
+    margin-bottom: 16pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 85%;
+    margin-bottom: 30pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 500;
+  }
+
+  /* ========== TOC（目录）========== */
+  .toc { break-after: page; }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 500;
+    margin-bottom: var(--rhythm-module);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    font-size: 11pt;
+  }
+  .toc-item:last-of-type { border-bottom: none; }
+  .toc-num {
+    color: var(--brand);
+    font-weight: 500;
+    min-width: 30pt;
+  }
+  .toc-title {
+    flex: 1;
+    color: var(--near-black);
+    padding-left: 6pt;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 12pt;
+  }
+  .toc-title[href]::after {
+    content: target-counter(attr(href), page);
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    margin-left: auto;
+  }
+
+  /* ========== HEADINGS ========== */
+  h1 {
+    font-size: 22pt;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 10pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    color: var(--near-black);
+    break-after: avoid;
+    string-set: section-title content();
+  }
+
+  .running-title { string-set: section-title content(); }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 24pt 0 8pt 0;
+    color: var(--near-black);
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 18pt 0 6pt 0;
+    color: var(--dark-warm);
+    break-after: avoid;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 6pt;
+  }
+
+  /* ========== PARAGRAPHS ========== */
+  p {
+    margin: 0 0 10pt 0;
+    line-height: 1.55;
+    color: var(--near-black);
+    widows: 2;
+    orphans: 2;
+  }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: var(--rhythm-module);
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+  strong { font-weight: 500; }
+
+  /* ========== LISTS ========== */
+  ul, ol {
+    margin: 6pt 0 10pt 0;
+    padding-left: 20pt;
+    line-height: 1.55;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+
+  /* ========== QUOTE ========== */
+  blockquote, .quote {
+    border-left: 2pt solid var(--brand);
+    margin: 12pt 0;
+    padding: 4pt 0 4pt 16pt;
+    color: var(--olive);
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  blockquote .cite, .quote .cite {
+    display: block;
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+  }
+
+  /* ========== CODE ========== */
+  /* Mono first for English glyphs, then CJK fallback so Chinese comments
+     inside code/pre render correctly. A mono-only chain causes missing
+     glyphs rendered as "?" or missing-glyph boxes in WeasyPrint when the system lacks
+     a mono font with CJK coverage. */
+  code {
+    font-family: "JetBrains Mono", "SF Mono", Consolas,
+                 "TsangerJinKai02", "Source Han Serif SC",
+                 "Noto Serif CJK SC", "Songti SC", monospace;
+    font-size: 9pt;
+    background: var(--ivory);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    color: var(--dark-warm);
+  }
+  pre {
+    font-family: "JetBrains Mono", "SF Mono", Consolas,
+                 "TsangerJinKai02", "Source Han Serif SC",
+                 "Noto Serif CJK SC", "Songti SC", monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+    white-space: pre-wrap;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  pre code { background: transparent; padding: 0; font-size: inherit; }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .callout blockquote,
+  .callout .quote {
+    border-left: none;
+    padding-left: 0;
+    margin: 6pt 0;
+    color: var(--olive);
+  }
+  .callout blockquote:first-child,
+  .callout .quote:first-child { margin-top: 0; }
+  .callout blockquote:last-child,
+  .callout .quote:last-child  { margin-bottom: 0; }
+
+  .takeaway {
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .takeaway-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 4pt;
+  }
+
+  /* ========== FIGURE ========== */
+  figure {
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  figure img {
+    max-width: 100%;
+    border-radius: 4pt;
+  }
+  /* Inline diagrams (e.g. a Mermaid-sourced SVG via scripts/mermaid_normalize.py):
+     center and cap width so the figure never bleeds past the text column. */
+  figure svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 78%;
+    height: auto;
+  }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    text-align: center;
+  }
+
+  /* ========== EXECUTIVE SUMMARY ========== */
+  .exec-summary {
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 6pt;
+    padding: 16pt 20pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .exec-summary h2 {
+    margin-top: 0;
+    font-size: 13pt;
+  }
+
+  /* ========== CHAPTER BREAK ========== */
+  .chapter { break-before: page; }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="reading.css">
+</head>
+<body class="">
+<a class="skip-link" href="#article">跳到正文</a>
+<nav class="reading-nav" aria-label="阅读导航"><a class="home" href="../index.html">一舟</a><a href="../index.html#works">返回作品集 ↗</a></nav>
+<main id="article">
+<header class="cover"><p class="cover-eyebrow">用户洞察 · 报告全文</p><h1 class="cover-title">大学生群体洞察报告</h1>
+<p class="cover-sub">研究对象：有社团经历但缺少真实项目成果的大二 / 大三学生。</p><p class="reading-note">基于任务说明、个人校园观察和访谈形成的初步洞察。保留原文内容与 AI 协作说明，仅调整阅读排版。</p></header>
+<details class="toc"><summary>篇目导航</summary><ol><li><a href="#section-1">一、我观察的是谁</a></li><li><a href="#section-2">二、我如何收集信息</a></li><li><a href="#section-3">三、我发现了什么</a></li><li><a href="#section-8">四、我的核心洞察</a></li><li><a href="#section-12">五、对招新的启发</a></li><li><a href="#section-18">六、AI 协作说明</a></li></ol></details><article class="article-body " aria-label="大学生群体洞察报告正文"><h2 id="section-1">一、我观察的是谁</h2>
+<p>我本次关注的对象是：<strong>有过社团、学生组织或校园活动经历，但缺少真实项目成果，正在为实习、简历或未来发展做准备的大二/大三学生。</strong></p>
+<p>这类学生通常不是完全没有行动力的人。他们可能参加过社团、学生会、志愿活动、比赛协助、推文制作或活动执行，也已经对大学校园生活有一定了解。但随着年级升高，他们开始发现，过去很多经历虽然“参加过”，却不一定能清楚说明自己真正做了什么、解决了什么问题、产出了什么成果。</p>
+<p>我用一句话定义这个人群：</p>
+<blockquote><p>我重点关注有社团或学生组织经历、但缺少真实项目成果的大二/大三学生。他们目前正在为实习、简历或未来方向做准备，希望通过加入校园团队获得能够写进简历、讲得清楚、展示得出来的真实项目经历。</p></blockquote>
+<p>我理解的“校园团队”，不是单纯参加活动或挂一个组织身份，而是大学生围绕真实校园任务进行协作的实践团队。根据任务说明，校园团队成员可能承担校园观察者、内容共创者、校园连接者、项目执行者等角色，参与访谈、问卷、学生需求收集、内容共创、社群运营、活动执行和项目复盘，并沉淀洞察报告、内容作品、传播方案、项目复盘等成果。</p>
+<hr>
+<h2 id="section-2">二、我如何收集信息</h2>
+<p>本次报告目前主要基于任务说明、个人校园观察和访谈形成初步洞察。</p>
+<h2 id="section-3">三、我发现了什么</h2>
+<h3 id="section-4">现象一：这类学生不再只满足于“参加过组织”</h3>
+<p>很多大二、大三学生已经有一些校园经历，但这些经历可能比较零散。例如参加活动、协助执行、转发宣传、做推文、参与志愿服务等。到了准备实习或整理简历时，他们可能会发现，自己很难把这些经历讲成一个完整项目。</p>
+<p>这说明，他们的需求已经从“大一时想多体验校园生活”，转向“希望获得更有成果感的实践经历”。他们不只是想加入一个组织，而是想获得一段能说清楚过程、分工和结果的项目经历。</p>
+<h3 id="section-5">现象二：他们对“快速成长”“提升能力”这类话术不一定信任</h3>
+<p>很多校园组织招新都会写“提升综合能力”“快速成长”“丰富简历”，但如果没有说明具体任务、投入时间、成果形式和成员分工，这类表达容易显得空泛。</p>
+<p>对这类学生来说，“成长”必须具体化。他们更关心的是：我到底会做什么？有没有真实任务？有没有反馈？最后能不能留下作品、报告、复盘或项目材料？</p>
+<p>任务说明里也提醒，招新内容不能只写“加入我们，你会成长”，而要把成长落到具体事情上，比如会接触什么问题、参与什么任务、与谁协作、留下什么成果。</p>
+<h3 id="section-6">现象三：他们担心加入后只是做杂活</h3>
+<p>有过社团经历的学生，可能已经经历过一些低价值任务，比如搬物资、签到、拉人进群、转发通知、临时打杂等。因此他们在看到新的校园团队招新时，会更谨慎地判断：这个项目是真的让我参与，还是只是需要廉价执行力？</p>
+<p>这说明，校园团队在招新时必须提前说清楚成员角色和任务边界。比如可以说明成员会参与调研、内容共创、社群运营、校园连接、活动执行和复盘，而不是只说“加入团队一起成长”。</p>
+<h3 id="section-7">现象四：他们更容易被“可展示成果”吸引</h3>
+<p>这类学生最在意的不一定是头衔，而是最后能不能留下东西。比如一份调研报告、一篇推文作品、一套传播方案、一次活动复盘、一段可以写进简历并在面试中讲清楚的项目经历。</p>
+<p>因此，校园团队真正吸引他们的点不是“多一个组织身份”，而是帮助他们把零散的校园参与经历，转化成可展示、可复盘、可表达的真实成果。</p>
+<h2 id="section-8">四、我的核心洞察</h2>
+<h3 id="section-9">洞察一：他们表面上想要“简历经历”，本质上想要“能被证明的能力”</h3>
+<p>这类学生可能会说自己想要项目经历、实习经历或简历素材，但背后真正的需求是：他们希望证明自己不是只参加过活动，而是真的做过事、解决过问题、产出过结果。</p>
+<p>所以校园团队的招新表达不能只说“丰富简历”，而要说清楚：成员会参与什么任务、承担什么角色、产出什么成果，以及这些成果如何帮助他们整理成一段完整的实践经历。</p>
+<h3 id="section-10">洞察二：他们最担心的不是投入时间，而是投入之后没有回报</h3>
+<p>这类学生并不一定排斥投入时间。真正让他们犹豫的是：如果花了很多时间开会、执行、转发、做杂事，最后却没有明确成果，就会觉得“不值得”。</p>
+<p>因此，招新内容需要提前回应他们的顾虑：每周大概投入多少时间？有没有清晰分工？是否有反馈和复盘？最后能留下什么成果？</p>
+<h3 id="section-11">洞察三：他们会被“真实项目感”吸引，而不是被“组织光环”吸引</h3>
+<p>对已经有过社团经历的学生来说，“加入一个组织”本身吸引力有限。真正打动他们的是：这个团队是否能让他们接触真实问题、完成真实任务、形成真实成果。</p>
+<p>如果校园团队能呈现从调研、内容、招募、执行到复盘的完整链路，就更容易吸引这类学生加入。</p>
+<h2 id="section-12">五、对招新的启发</h2>
+<h3 id="section-13">更值得优先招募的人群</h3>
+<p>我认为更值得优先招募的是：</p>
+<blockquote><p>有社团、学生组织或校园活动经历，但对过去经历的成果感不强，正在寻找真实项目经历的大二/大三学生。</p></blockquote>
+<p>他们已经有一定参与基础，也更容易理解团队协作和项目执行；同时，他们正处在需要升级个人经历、准备实习和探索未来方向的阶段。</p>
+<h3 id="section-14">适合的招新渠道</h3>
+<p>适合触达他们的渠道包括：</p>
+<ul><li>学院群、年级群、社团群</li><li>朋友圈转发</li><li>学长学姐或同伴推荐</li><li>小红书、校园墙等经验分享平台</li><li>学生组织、比赛、实践项目信息群</li></ul>
+<p>我认为最适合触达这类学生的渠道是：<strong>朋友圈转发 + 社团/学院群 + 熟人推荐</strong>。因为这类学生对项目真实性比较敏感，他们不仅看内容本身，也会看是谁推荐、是否有人参与过、项目是否可信。</p>
+<p>仅仅在公众号或大群里发布信息可能效果不好，因为这类学生已经看过很多类似招新内容，如果文案还是“成长、平台、能力提升”这些空泛表达，很容易被忽略。</p>
+<h3 id="section-15">最值得强调的项目价值</h3>
+<p>校园团队最值得强调的价值是：</p>
+<blockquote><p>你不是来多参加一个组织，而是参与一次真实校园项目，把过去零散的校园经历，变成能讲清楚、能展示、能复盘的项目成果。</p></blockquote>
+<p>可以重点强调：</p>
+<ul><li>真实任务：访谈、调研、内容共创、社群运营、活动执行、项目复盘</li><li>真实成果：洞察报告、内容作品、传播方案、活动复盘、项目记录</li><li>真实协作：和同伴一起完成项目，而不是单纯打杂</li><li>真实成长：从执行任务，到理解需求，再到形成表达和复盘</li></ul>
+<h3 id="section-16">必须提前解释清楚的问题</h3>
+<p>招新内容里必须回答这些问题：</p>
+<ul><li>加入后具体做什么？</li><li>会不会只是打杂？</li><li>没有经验能不能参与？</li><li>每周大概投入多少时间？</li><li>成员可以选择哪些方向？</li><li>最后能留下什么成果？</li><li>有没有反馈、复盘或作品沉淀？</li></ul>
+<h3 id="section-17">应避免的表达</h3>
+<p>应避免：</p>
+<ul><li>“快速成长”</li><li>“提升综合能力”</li><li>“丰富你的简历”</li><li>“高质量平台”</li><li>“加入就能获得实习机会”</li><li>“保证收获满满”</li></ul>
+<p>这些表达如果没有具体事实支撑，会让学生觉得不可信。任务说明中也提醒，不能承诺项目组尚未确认的权益，也不能把历史数据包装成当前实时资源。</p>
+<h2 id="section-18">六、AI 协作说明</h2>
+<p>本次报告中，AI 主要帮助我完成了报告结构梳理、人群定位、洞察表达和招新启发整理。我保留了 AI 在结构和语言表达上的帮助，但没有让 AI 编造访谈对象、数据或用户原话。</p></article>
+</main>
+<footer class="reading-footer"><p>读到这里，谢谢你。欢迎来信聊聊你的感受。</p><nav aria-label="阅读结束导航"><a href="../index.html#works">← 返回作品集</a><a href="mailto:xuh93219@gmail.com">写信给一舟 ↗</a><a href="#article">回到开头 ↑</a></nav></footer>
+</body></html>
