@@ -3,161 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="一舟的个人网站：文学写作、用户洞察与金融研究。" />
+  <meta name="description" content="一舟的河岸编辑部：文学写作、用户洞察与金融研究。" />
   <meta name="theme-color" content="#F3EFE6" />
-  <title>一舟｜个人网站</title>
+  <title>河岸编辑部｜一舟</title>
   <link rel="icon" href="data:," />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260904-7" />
 </head>
 <body>
   <a class="skip-link" href="#main">跳到正文</a>
-
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="返回首页">河岸编辑部</a>
+    <nav aria-label="主导航">
+      <a href="#top">首页</a><a href="#works">作品</a><a href="#method">最近在做</a><a href="#contact">联系我</a>
+    </nav>
+  </header>
   <main id="main">
     <section class="section hero" id="top" aria-labelledby="hero-title">
-      <nav class="section-nav section-nav--hero" aria-label="首屏导航">
-        <a href="#about">关于我</a>
-        <a href="#works">我做过的事</a>
-        <a href="#contact">联系我</a>
-      </nav>
+      <div class="hero-copy"><p class="section-index">01 / 个人档案</p><h1 id="hero-title">一舟</h1><p class="hero-identity">我是金融专业大三学生。课业之外，我做用户研究和公司研究，也爱看话剧、写小说。</p><p class="hero-statement">这里放着我目前最完整的三份作品：<br>一份用户洞察，一份公司研究，还有一部小说。</p><div class="hero-actions" aria-label="主要入口"><a href="#works">阅读作品 <span aria-hidden="true">↘</span></a><a href="#themes">了解三个方向 <span aria-hidden="true">↘</span></a></div></div>
+      <div class="hero-world" aria-hidden="true"><svg class="hero-scene" viewBox="0 0 1672 470" preserveAspectRatio="none"><g class="river-drift"><path class="river river--one" d="M-48 102 C148 76 312 101 475 176 C642 253 785 259 954 231 C1164 196 1341 145 1508 158 C1593 164 1665 181 1724 205" /><path class="river river--two" d="M-42 202 C132 172 291 187 460 244 C632 303 801 302 968 267 C1149 229 1328 211 1491 211 C1589 211 1667 222 1725 239" /><path class="river river--three" d="M-38 276 C151 246 318 265 502 309 C676 350 833 333 1018 296 C1191 262 1390 241 1718 270" /></g><g class="river-ripples"><path d="M118 235 C205 220 286 226 355 248" /><path d="M1288 253 C1380 236 1481 236 1576 253" /></g><g class="boat"><path class="boat-clearance" d="M839 215 C921 237 1020 223 1118 188 L1095 263 C1009 288 915 282 862 248 Z" /><path class="boat-hull" d="M839 215 C921 237 1020 223 1118 188 L1095 263 C1009 288 915 282 862 248 Z" /><path class="boat-rim" d="M839 215 C923 245 1027 229 1118 188" /><path class="boat-rim boat-rim--inner" d="M854 229 C934 251 1028 238 1109 207" /><path class="boat-plank" d="M868 249 C939 267 1027 256 1101 229" /><path class="boat-plank" d="M882 267 C949 280 1024 271 1097 246" /><path class="boat-canopy-fill" d="M930 219 L936 164 C965 142 1012 141 1045 158 L1055 207 Z" /><path class="boat-canopy" d="M930 219 L936 164 C965 142 1012 141 1045 158 L1055 207" /><path class="boat-canopy" d="M938 173 C968 151 1010 150 1043 166" /><path class="boat-canopy-rib" d="M954 155 L958 214 M976 147 L980 211 M999 147 L1003 207 M1022 151 L1026 203" /><path class="boat-end" d="M839 215 L820 207 L845 230" /><path class="boat-end" d="M1118 188 L1134 193 L1105 267 L1095 263" /></g></svg></div>
+      <div class="discipline-rail" aria-label="实践方向"><span>文学写作</span><span>用户洞察</span><span>金融研究</span></div>
+      <a class="scroll-cue" href="#themes">向下阅读 <span>↓</span></a>
+    </section>
 
-      <div class="hero-copy">
-        <h1 id="hero-title">一舟</h1>
-        <p class="hero-identity">大三金融学生，也持续进行文学写作、用户洞察和金融研究。</p>
-        <p class="hero-statement">我正在把金融训练、数据能力、文学感受力和真实性判断，<br>慢慢焊接成自己的方法论。</p>
-        <div class="hero-actions" aria-label="主要入口">
-          <a href="#works">阅读作品</a>
-          <a href="#contact">写信交流</a>
-        </div>
-      </div>
-
-      <div class="hero-world" aria-hidden="true">
-        <svg class="hero-scene" viewBox="0 0 1672 470" preserveAspectRatio="none">
-          <g class="river-drift">
-            <path class="river river--one" d="M-40 65 C196 62 280 100 438 164 C605 233 764 235 950 218 C1200 239 1355 117 1540 147 C1610 145 1670 146 1718 167" />
-            <path class="river river--two" d="M-30 189 C142 144 284 167 444 228 C613 290 707 215 905 235 C1120 284 1280 241 1425 205 C1540 176 1640 177 1725 200" />
-            <path class="river river--three" d="M790 224 C842 217 957 256 1086 294 C1170 316 1230 320 1302 311" />
-          </g>
-
-          <g class="boat">
-            <path d="M770 223 C854 244 982 225 1137 194 L1114 304 C999 330 883 320 808 286 Z" />
-            <path d="M784 247 C875 268 996 246 1127 218" />
-            <path d="M798 274 C894 294 1003 276 1120 249" />
-            <path d="M813 298 C910 314 1008 302 1116 278" />
-            <path d="M770 223 L787 215 L810 228" />
-            <path d="M1137 194 L1154 199 L1124 307 L1114 304" />
-            <path d="M1141 195 L1161 199 L1129 309" />
-          </g>
-
-          <g class="bridge">
-            <path d="M1272 166 C1329 160 1365 99 1442 84 C1524 68 1601 84 1682 127" />
-            <path d="M1272 180 C1335 178 1373 118 1447 103 C1520 89 1596 104 1677 142" />
-            <path d="M1294 181 L1294 211 M1372 165 C1378 115 1469 122 1473 208 M1505 208 C1515 120 1612 124 1621 207" />
-            <path d="M1270 211 L1696 211" />
-          </g>
-        </svg>
-
-        <div class="discipline discipline--literature"><span></span>文学写作</div>
-        <div class="discipline discipline--insight"><span></span>用户洞察</div>
-        <div class="discipline discipline--finance"><span></span>金融研究</div>
+    <section class="section themes" id="themes" aria-labelledby="themes-title">
+      <div class="section-topline"><span>02 / 三个方向</span></div>
+      <div class="themes-intro"><h2 id="themes-title">我在做的三件事</h2><p>这三份作品的起点不同，我在意的问题也不同。</p></div>
+      <div class="theme-list">
+        <article class="theme-row">
+          <div class="theme-no">01</div><h3>用户洞察</h3>
+          <div class="theme-body">
+            <p class="theme-question">做一场活动之前，先弄清楚它要解决谁的问题。</p>
+            <p>做这份报告前，我先想弄清楚两件事：大学生真正需要什么样的项目经历，一场活动又能为他们做什么。</p>
+            <p>我重点关注的是有社团或学生组织经历，却拿不出实际项目成果的大学生。他们正在准备实习、修改简历，常说自己“经历丰富”；但再问具体做过什么，很多人就很难讲清楚。</p>
+            <p>确定人群后，我做了校园观察和访谈，再把收集到的材料放在一起整理。原来的预判有些得到了证实，也有些和实际情况对不上，我都保留了下来。</p>
+            <p>整理这些材料时，我发现，他们最怕的是花了时间却什么也没留下，真正感兴趣的是具体任务和能拿出来展示的成果。于是报告最后回到活动本身：应该找什么样的人，从哪里找到他们，又该怎样把参与者真正能得到的东西说清楚。</p>
+          </div>
+          <a href="#work-insight" aria-label="查看用户洞察作品">查看作品 <span>↗</span></a>
+        </article>
+        <article class="theme-row">
+          <div class="theme-no">02</div><h3>金融研究</h3>
+          <div class="theme-body">
+            <p class="theme-question">研究一家公司，要先看懂它怎样做生意。</p>
+            <p>做上港集团研究时，我没有急着计算估值，而是先去了解港口行业和公司本身。一家公司身处怎样的行业、靠什么赚钱、为什么能站稳现在的位置，都会影响后面的判断。</p>
+            <p>我先梳理了上港集团的发展过程、管理团队和业务结构，再看它的收入从哪里来，在行业里处于什么位置，又有哪些竞争对手难以复制的优势。弄清这些，才有可能判断哪些业务还能增长，未来的收入和利润又会受到什么影响。</p>
+            <p>财务数据记录的是公司的过去和现在，估值还要回答它未来能创造多少价值。我会根据前面的行业和业务分析作出假设，再回头检查数据能不能支撑这些假设。</p>
+            <p>最后，我分别使用企业自由现金流（Free Cash Flow to Firm，FCFF）、分业务估值和相对估值进行计算，再比较不同方法得出的结果。报告也单独列出了主要风险，因为公司的上升空间要讲清楚，自己可能看错的地方也不能省略。</p>
+          </div>
+          <a href="#work-port" aria-label="查看金融研究作品">查看作品 <span>↗</span></a>
+        </article>
+        <article class="theme-row">
+          <div class="theme-no">03</div><h3>文学写作</h3>
+          <div class="theme-body">
+            <p class="theme-question">《旧日来风》最初来自一个关于天灾的念头。</p>
+            <p>灾难把人推到生死面前，那些过去因为胆小没有说出口的话，也终于有了被说出来的可能。这是《旧日来风》最早的灵感，也是我一直不想丢掉的东西。</p>
+            <p>有了这个起点以后，我才开始补全两位主角的过去：她们是什么样的人，曾经发生过什么，为什么会分开，又要经历怎样的心理变化，才有可能重新面对彼此。</p>
+            <p>我想写的，是她们怎样放下外界的质疑和束缚，重新接受真实的自己。祝书禾要走出别人眼中的“乖乖女”，江跃也要重新理解自己一直向往的“自由”。整篇小说也由此慢慢展开。</p>
+            <p>写的时候，我最怕把最初打动自己的东西改没了。所以我会先守住那个念头，等人物和故事逐渐站稳以后，再回头调整情节、对话和节奏。</p>
+          </div>
+          <a href="#work-novel" aria-label="查看文学写作作品">查看作品 <span>↗</span></a>
+        </article>
       </div>
     </section>
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <nav class="section-nav section-nav--ruled" aria-label="关于我导航">
-        <a href="#about" aria-current="true">关于我</a>
-        <a href="#works">我做过的事</a>
-        <a href="#contact">联系我</a>
-      </nav>
-      <div class="about-layout">
-        <div class="about-copy">
-          <h2 id="about-title">表面的叙述，<br>是否经得起更具体的<br>观察和验证？</h2>
-          <p>我是一名大三金融学生，也持续进行文学写作、<br class="desktop-break">用户洞察和金融研究。</p>
-        </div>
-        <svg class="method-map" viewBox="0 0 680 470" role="img" aria-labelledby="method-title method-desc">
-          <title id="method-title">四种训练，汇聚为自己的方法论</title>
-          <desc id="method-desc">金融训练、数据能力、文学感受力和真实性判断共同汇聚为方法论，不表示数值或能力评分。</desc>
-          <defs>
-            <pattern id="thread-ticks" width="11" height="11" patternUnits="userSpaceOnUse"><path d="M5.5 2V9" stroke="currentColor" stroke-width=".9"/></pattern>
-          </defs>
-          <g class="method-labels" fill="currentColor">
-            <text x="4" y="62">金融训练</text><text x="4" y="176">数据能力</text>
-            <text x="-14" y="290">文学感受力</text><text x="-14" y="404">真实性判断</text>
-            <text x="550" y="245">方法论</text>
-          </g>
-          <g class="method-lines" fill="none" stroke="currentColor" stroke-width="1.4">
-            <path pathLength="1" d="M154 54H231C370 54 341 186 450 235"/>
-            <path pathLength="1" d="M154 168H234C330 168 368 205 450 235"/>
-            <path pathLength="1" d="M154 282H236C338 282 366 263 450 235"/>
-            <path pathLength="1" d="M154 396H244C368 396 374 284 450 235"/>
-            <rect x="450" y="223" width="22" height="24"/>
-            <path d="M472 235H538"/>
-          </g>
-          <g class="method-stitches" fill="url(#thread-ticks)">
-            <rect x="156" y="48" width="120" height="11"/>
-            <rect x="156" y="162" width="100" height="11"/>
-            <rect x="156" y="276" width="90" height="11"/>
-            <rect x="156" y="390" width="120" height="11"/>
-            <rect x="474" y="229" width="62" height="11"/>
-          </g>
-        </svg>
-      </div>
-    </section>
-    <section class="section works" id="works" aria-labelledby="works-title">
-      <nav class="section-nav section-nav--ruled" aria-label="作品导航">
-        <a href="#about">关于我</a>
-        <a href="#works" aria-current="true">我做过的事</a>
-        <a href="#contact">联系我</a>
-      </nav>
-      <div class="works-layout">
-        <header class="works-heading">
-          <h2 id="works-title">我做过的事</h2>
-          <span class="works-caption">三份档案</span>
-        </header>
-        <div class="work-collection">
-          <article class="work-card">
-            <div class="work-category"><span>01</span>文学写作</div>
-            <figure class="work-preview"><img src="assets/work-novel.png" width="720" height="900" alt="《旧日来风》终章节选：前面还有很多页。风从旧日来，相见再重逢。" decoding="async"></figure>
-            <h3>《旧日来风》</h3>
-            <p>两位女性的成长与重逢</p>
-            <p class="work-detail">第二版修订稿 · 超过 2.1 万字</p>
-            <a class="work-status" href="works/old-wind.html" aria-label="阅读《旧日来风》完整小说">阅读完整小说 ↗</a>
-          </article>
-          <article class="work-card">
-            <div class="work-category"><span>02</span>用户洞察</div>
-            <figure class="work-preview"><img src="assets/work-insight.png" width="720" height="900" alt="大学生群体洞察报告：从简历经历到能被证明的能力，关注真实任务、成果、协作与成长。" decoding="async"></figure>
-            <h3>大学生群体洞察报告</h3>
-            <p>从“丰富简历”到<br class="compact-break">“获得能够被证明的能力”</p>
-            <a class="work-status" href="works/student-insight.html" aria-label="阅读大学生群体洞察报告全文">阅读全文 ↗</a>
-          </article>
-          <article class="work-card">
-            <div class="work-category"><span>03</span>金融研究</div>
-            <figure class="work-preview work-preview--port"><img src="assets/work-port.webp" width="720" height="900" alt="上港集团研究报告的现金流预测假设表和 FCFF 估值计算，摘自真实报告正文。" decoding="async"></figure>
-            <h3>上港集团权益投资深度研究</h3>
-            <p><abbr title="自由现金流估值">FCFF</abbr> · 分业务估值 · 相对估值</p>
-            <a class="work-status" href="works/shanghai-port.html" aria-label="阅读上港集团权益投资深度研究脱敏版">阅读研究报告 ↗</a>
-          </article>
-          <div class="stitched-rule work-thread" aria-hidden="true"></div>
-        </div>
-      </div>
-    </section>
-    <section class="section contact" id="contact" aria-labelledby="contact-title">
-      <nav class="section-nav section-nav--ruled" aria-label="联系导航">
-        <a href="#about">关于我</a>
-        <a href="#works">我做过的事</a>
-        <a href="#contact" aria-current="true">联系我</a>
-      </nav>
-      <div class="contact-content">
-        <h2 id="contact-title">联系我</h2>
-        <p class="contact-invitation">如果你也对写作、人的选择、用户洞察或金融研究感兴趣，<br>欢迎来信交流，也欢迎阅读我的作品。</p>
-        <a class="contact-email" href="mailto:xuh93219@gmail.com">xuh93219<wbr>@gmail.com</a>
-        <div class="stitched-rule contact-thread" aria-hidden="true"></div>
-        <div class="contact-links">
-          <a class="letter-link" href="mailto:xuh93219@gmail.com">写信交流</a>
-          <a class="github-link" href="https://github.com/xuh93219-spec" target="_blank" rel="noopener noreferrer" aria-label="GitHub：xuh93219-spec（新标签页打开）"><span>GitHub</span><span>github.com/xuh93219-spec <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></span></a>
-        </div>
-      </div>
-    </section>
+
+    <section class="section works" id="works" aria-labelledby="works-title"><div class="section-topline"><span>03 / 作品</span></div><div class="works-intro"><h2 id="works-title">三份完整作品</h2><p>这里放的是完整内容，可以直接打开阅读。</p></div><div class="work-collection"><article class="work-card work-card--featured" id="work-novel"><div class="work-meta"><span>01</span><span>文学写作 / 小说</span></div><a class="work-preview work-preview--featured" href="works/old-wind.html"><img src="assets/work-novel.png" width="720" height="900" alt="《旧日来风》终章节选：前面还有很多页。风从旧日来，相见再重逢。" decoding="async"></a><div class="work-info"><h3>《旧日来风》</h3><p>一部短小说，写两位女性多年后的重逢。一次突如其来的灾难，让她们重新面对过去，也开始寻找没有被别人定义过的自己。目前是第二版，共 2.1 万余字。</p><a class="read-link" href="works/old-wind.html">阅读小说 <span>↗</span></a></div></article><div class="work-side"><article class="work-card" id="work-insight"><div class="work-meta"><span>02</span><span>用户洞察</span></div><div class="work-inline"><a class="work-preview" href="works/student-insight.html"><img src="assets/work-insight.png" width="720" height="900" alt="大学生群体洞察报告预览。" loading="lazy" decoding="async"></a><div class="work-info"><h3>大学生群体洞察报告</h3><p>一份面向大学生的用户洞察报告。它关注有校园经历却缺少实际成果的学生，分析他们怎样看待“经历”和“能力”，并根据观察与访谈提出活动设计建议。</p><a class="read-link" href="works/student-insight.html">阅读报告 <span>↗</span></a></div></div></article><article class="work-card" id="work-port"><div class="work-meta"><span>03</span><span>金融研究</span></div><div class="work-inline"><a class="work-preview work-preview--port" href="works/shanghai-port.html"><img src="assets/work-port.webp" width="720" height="900" alt="上港集团研究报告的现金流预测假设表和 FCFF 估值计算。" loading="lazy" decoding="async"></a><div class="work-info"><h3>上港集团权益投资深度研究</h3><p>一份上港集团权益研究。报告梳理了公司的业务、盈利来源、行业地位和竞争壁垒，并使用 FCFF、分业务估值和相对估值测算公司价值，同时列出主要风险。</p><a class="read-link" href="works/shanghai-port.html">查看研究 <span>↗</span></a></div></div></article></div></div></section>
+
+    <section class="section method" id="method" aria-labelledby="method-title"><div class="section-topline"><span>04 / 最近在做</span></div><div class="method-layout"><div class="method-copy"><h2 id="method-title">最近在做</h2></div><ol class="process-list"><li><span>01</span><p>继续补金融专业课，把还没弄懂的问题一点点啃下来。</p></li><li><span>02</span><p>不让学到的东西只停在笔记里，尽量把它们做成能拿出来看的作品。</p></li><li><span>03</span><p>继续修改《旧日来风》，最近主要在改句子和对话。</p></li></ol></div><div class="method-rail" aria-hidden="true"><span>继续学习</span><i></i><span>动手实践</span><i></i><span>反复修改</span></div></section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title"><div class="section-topline"><span>05 / 联系</span></div><div class="contact-layout"><div><h2 id="contact-title">欢迎给我写信</h2><p>如果你想聊用户研究、公司研究或小说，或者读完作品以后有不同看法，可以给我写信。</p></div><div class="contact-actions"><a class="contact-email" href="mailto:xuh93219@gmail.com">给我写信</a><a class="contact-link" href="mailto:xuh93219@gmail.com">邮箱 <span>xuh93219@gmail.com ↗</span></a><a class="contact-link" href="https://github.com/xuh93219-spec" target="_blank" rel="noopener noreferrer">GitHub <span>github.com/xuh93219-spec ↗</span></a><a class="contact-link contact-link--quiet" href="#top">回到开头 <span>↑</span></a></div></div><div class="contact-foot"><span>河岸编辑部 / 一舟</span><span>这个网站会继续更新。</span></div></section>
   </main>
-
-  <script src="script.js"></script>
+  <script src="script.js?v=20260904-7"></script>
 </body>
 </html>
