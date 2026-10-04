@@ -131,3 +131,22 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
 @media(max-width:680px){.contact-header{padding:26px 0;align-items:flex-start;flex-direction:column;gap:20px}.contact-header .wordmark{font-size:28px}.contact-main{padding:54px 0}.contact-main h1{font-size:58px}.contact-intro{font-size:22px}.contact-email{margin-top:40px}.contact-email a{font-size:25px}.contact-actions{gap:24px}.contact-actions .text-link{font-size:19px}}
 @media(max-width:360px){.contact-email a{font-size:22px}}
 @media(prefers-reduced-motion:reduce){.book-cover img,.now-photos img,.hero-photo{transition:none}.book-cover:hover img,.now-photos figure:hover img,.hero-photo:hover{transform:none}}
+.playground{background:var(--light);padding:64px 0 56px}
+.playground .section-title{font-size:76px}
+.playground-intro{font-size:24px;color:#555;margin-top:20px;line-height:1.75}
+.playground-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;margin-top:32px}
+.game-preview{display:block;position:relative;aspect-ratio:3/2;overflow:hidden;background:#101521;text-decoration:none}
+.game-preview img{width:100%;height:100%;object-fit:contain;transition:transform .3s ease}
+.game-overlay{position:absolute;right:20px;bottom:18px;background:#f2f2f2;color:#111;padding:7px 14px;font-size:17px;font-weight:700;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
+.game h3{font-size:34px;line-height:1.5;margin-top:20px;font-weight:900}
+.game h3 a{text-decoration:none}
+.game h3 span{font-size:22px;color:#626262;font-weight:500;margin-left:12px}
+.game>p{font-size:20px;color:#555;line-height:1.8;margin-top:6px}
+.tool-room{border-top:1px solid #ccc;margin-top:32px;padding-top:25px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.tool-room p{font-size:23px;font-weight:700}.tool-room p span{font-size:18px;color:#626262;font-weight:400;margin-left:20px}
+.tool-room .text-link{font-size:21px;white-space:nowrap}
+.game-preview:focus-visible .game-overlay{opacity:1;transform:none}
+@media(hover:hover) and (pointer:fine){.game-preview:hover img{transform:scale(1.025)}.game-preview:hover .game-overlay{opacity:1;transform:none}}
+@media(max-width:900px){.playground{padding:64px 0}.playground .section-title{font-size:68px}.playground-intro{font-size:21px}.playground-grid{gap:28px}.game h3{font-size:30px}.game h3 span{font-size:18px}.game>p{font-size:18px}.tool-room p span{display:block;margin:5px 0 0}}
+@media(max-width:680px){.playground{padding:56px 0}.playground .section-title{font-size:48px}.playground-intro{font-size:17px;margin-top:20px}.playground-grid{grid-template-columns:minmax(0,1fr);gap:36px;margin-top:32px}.game h3{font-size:28px;margin-top:14px}.game h3 span{font-size:18px}.game>p{font-size:17px}.tool-room{align-items:flex-start;margin-top:32px;padding-top:22px;gap:14px}.tool-room p{font-size:18px}.tool-room p span{font-size:15px;max-width:160px}.tool-room .text-link{font-size:17px}.game-overlay{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.game-preview img,.game-overlay{transition:none}.game-preview:hover img{transform:none}}
