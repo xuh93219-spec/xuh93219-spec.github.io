@@ -135,7 +135,7 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:4px}
 .playground .section-title{font-size:76px}
 .playground-intro{font-size:24px;color:#555;margin-top:20px;line-height:1.75}
 .playground-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px;margin-top:32px}
-.game-preview{display:block;position:relative;aspect-ratio:3/2;overflow:hidden;background:#101521;text-decoration:none}
+.game-preview{display:block;position:relative;aspect-ratio:1;overflow:hidden;background:#101521;text-decoration:none}
 .game-preview img{width:100%;height:100%;object-fit:contain;transition:transform .3s ease}
 .game-overlay{position:absolute;right:20px;bottom:18px;background:#f2f2f2;color:#111;padding:7px 14px;font-size:17px;font-weight:700;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
 .game h3{font-size:34px;line-height:1.5;margin-top:20px;font-weight:900}
